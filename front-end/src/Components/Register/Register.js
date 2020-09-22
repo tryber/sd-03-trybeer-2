@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
-
     <div>
       <form>
         <h1>Registro</h1>

@@ -7,7 +7,7 @@ const ButtonEnter = () => {
     <div>
       <button
         disabled={ disableButton }
-        data-testid="login-submit-btn"
+        data-testid="signin-btn"
         type="submit"
       >
         Entrar

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Register = () => (
   <div>
@@ -15,7 +14,6 @@ const Register = () => (
         Quero vender
         <input type="checkbox" data-testid="signup-seller" />
       </div>
-      <Link to="/Cliente-Produtos">Cadastrar</Link>
     </form>
   </div>
 );

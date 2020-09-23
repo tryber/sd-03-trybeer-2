@@ -1,21 +1,20 @@
 import React, { useContext, useEffect } from 'react';
-// import { useForm } from 'react-hook-form';
 import { ContextPlication } from '../../Context';
 import api from '../../Services/api';
 import { login } from '../../Services/auth';
+import ButtonEnter from './ButtonEnter';
 
 const handleChangeInput = (name, event, input, setUser) => {
   setUser({ ...input, [name]: event });
 };
 
+const validEmailRegEx = /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([.][A-Z0-9_'%=+!`#~$*?^{}&|-]+)*@[A-Z0-9-]+(\.[A-Z0-9-]+)+$/i;
+const minPassword = 6;
+
 const FormInput = () => {
   const { setUser, user, setDisableButton } = useContext(ContextPlication);
-  // const { handleSubmit } = useForm();
 
   useEffect(() => {
-    const validEmailRegEx = /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([.][A-Z0-9_'%=+!`#~$*?^{}&|-]+)*@[A-Z0-9-]+(\.[A-Z0-9-]+)+$/i;
-    const minPassword = 6;
-
     if (!validEmailRegEx.test(user.email) || (user.password.length < minPassword)) {
       return setDisableButton(true);
     }
@@ -27,17 +26,17 @@ const FormInput = () => {
     const { email, password } = user;
     try {
       const response = await api.post('/login', { email, password });
-      console.log(response);
       login(response.data.token);
     } catch (err) {
-      console.error(err);
+      return err;
     }
+    return null;
   };
 
   return (
     <div>
       <h1>Login</h1>
-      <form onSubmit={ () => singIn() }>
+      <form onSubmit={ singIn }>
         <input
           className="buttons"
           placeholder="Email"
@@ -54,6 +53,7 @@ const FormInput = () => {
           required
           type="password"
         />
+        <ButtonEnter />
       </form>
     </div>
   );

@@ -22,7 +22,7 @@ const Register = () => {
   const validationRegister = () => (
     (name.length >= nameInvalid && validName.test(name))
     && (password.length >= passwordInvalid && typeof password !== 'number')
-    && (validEmail.test(email))
+    && (validEmail.test(email) && (email === email))
   );
 
   return (
@@ -41,14 +41,14 @@ const Register = () => {
         type="email"
         onChange={ (event) => setEmail(event.target.value) }
       />
-      <div>Senha</div>
+      <div>Password</div>
       <input
         className="buttonPassword"
         data-testid="signup-password"
         onChange={ (event) => setPassword(event.target.value) }
       />
       <div>
-        Quero vender
+        Quero Vender
         <input
           type="checkbox"
           data-testid="signup-seller"
@@ -66,7 +66,7 @@ const Register = () => {
             data-testid="signup-btn"
             disabled={ !validationRegister() }
           >
-            Cadastro
+            Cadastrar
           </button>
         </div>
       </div>

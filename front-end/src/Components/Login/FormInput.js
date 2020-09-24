@@ -26,7 +26,7 @@ const FormInput = () => {
     const { email, password } = user;
     try {
       const response = await api.post('/login', { email, password });
-      login(response.data.token);
+      login(response.data);
     } catch (err) {
       return err;
     }

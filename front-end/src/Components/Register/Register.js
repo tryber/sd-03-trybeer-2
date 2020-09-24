@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { ContextPlication } from '../../Context';
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [role, setRole] = useState('clien');
+  const {
+    name,
+    setName,
+    password,
+    setPassword,
+    email,
+    setEmail,
+    role,
+    setRole,
+  } = useContext(ContextPlication);
 
   const nameInvalid = 12;
   const passwordInvalid = 6;
@@ -25,39 +32,39 @@ const Register = () => {
       <input
         className="buttonRegister"
         data-testid="signup-name"
-        onChange={ (event) => setName(event.target.value) }
+        onChange={(event) => setName(event.target.value)}
       />
       <div>Email</div>
       <input
         className="buttonEmail"
         data-testid="signup-email"
         type="email"
-        onChange={ (event) => setEmail(event.target.value) }
+        onChange={(event) => setEmail(event.target.value)}
       />
       <div>Senha</div>
       <input
         className="buttonPassword"
         data-testid="signup-password"
-        onChange={ (event) => setPassword(event.target.value) }
+        onChange={(event) => setPassword(event.target.value)}
       />
       <div>
         Quero vender
         <input
           type="checkbox"
           data-testid="signup-seller"
-          onChange={ () => {
+          onChange={() => {
             if (role === 'client') {
               setRole('administrator');
             } else {
               setRole('client');
             }
-          } }
+          }}
         />
         <div>
           <button
             type="submit"
             data-testid="signup-btn"
-            disabled={ !validationRegister() }
+            disabled={!validationRegister()}
           >
             Cadastro
           </button>

@@ -4,7 +4,7 @@ const Register = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('client');
+  const [role, setRole] = useState('clien');
 
   const nameInvalid = 12;
   const passwordInvalid = 6;

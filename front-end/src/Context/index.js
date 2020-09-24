@@ -30,7 +30,7 @@ const AplicationProvider = ({ children }) => {
 
   return (
     <div>
-      <ContextPlication.Provider value={context}>
+      <ContextPlication.Provider value={ context }>
         {children}
       </ContextPlication.Provider>
     </div>

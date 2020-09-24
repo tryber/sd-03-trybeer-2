@@ -10,7 +10,7 @@ const ButtonEnter = () => {
         data-testid="signin-btn"
         type="submit"
       >
-        Entrar
+        ENTRAR
       </button>
     </div>
   );

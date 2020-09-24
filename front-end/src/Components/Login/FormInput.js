@@ -48,7 +48,7 @@ const FormInput = () => {
           />
         </label>
         <label htmlFor="password" data-testid="password-input">
-          Senha
+          Password
           <input
             className="buttons"
             onChange={ ({ target }) => handleChangeInput('password', target.value, user, setUser) }

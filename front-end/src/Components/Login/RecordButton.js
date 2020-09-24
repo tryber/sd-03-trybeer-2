@@ -6,7 +6,7 @@ const RecordButton = () => (
     <Link to="/register">
       <button
         type="button"
-        datatype="no-account-btn"
+        data-testid="no-account-btn"
       >
         Ainda não tenho conta
       </button>

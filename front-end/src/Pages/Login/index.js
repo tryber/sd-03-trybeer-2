@@ -1,5 +1,5 @@
 import React from 'react';
-import FormInput from '../../Components/FormInput';
+import FormInput from '../../Components/Login/FormInput';
 import ButtonEnter from '../../Components/Login/ButtonEnter';
 import RecordButton from '../../Components/Login/RecordButton';
 

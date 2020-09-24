@@ -1,5 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect,useState } from 'react';
 import { ContextPlication } from '../../Context';
+
+const nameInvalid = 12;
+const passwordInvalid = 6;
+
+const validEmail = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+const validName = /[A-Z-a-z]+$/i;
 
 const Register = () => {
   const {
@@ -13,17 +19,23 @@ const Register = () => {
     setRole,
   } = useContext(ContextPlication);
 
-  const nameInvalid = 12;
-  const passwordInvalid = 6;
+  const [isCheked, setisCheked] = useState(false)
 
-  const validEmail = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-  const validName = /[A-Z-a-z]+$/i;
+  useEffect(() => {
+    if (isCheked) {
+      return setRole('administrator');
+    }
+    setRole('client');
+  }, [isCheked])
+
+  console.log(role);
 
   const validationRegister = () => (
     (name.length >= nameInvalid && validName.test(name))
     && (password.length >= passwordInvalid && typeof password !== 'number')
-    && (validEmail.test(email) && (email === email))
+    && (validEmail.test(email))
   );
+
 
   return (
     <form>
@@ -32,39 +44,34 @@ const Register = () => {
       <input
         className="buttonRegister"
         data-testid="signup-name"
-        onChange={ (event) => setName(event.target.value) }
+        onChange={(event) => setName(event.target.value)}
       />
       <div>Email</div>
       <input
         className="buttonEmail"
         data-testid="signup-email"
         type="email"
-        onChange={ (event) => setEmail(event.target.value) }
+        onChange={(event) => setEmail(event.target.value)}
       />
       <div>Password</div>
       <input
         className="buttonPassword"
         data-testid="signup-password"
-        onChange={ (event) => setPassword(event.target.value) }
+        type="password"
+        onChange={(event) => setPassword(event.target.value)}
       />
       <div>
         Quero Vender
         <input
           type="checkbox"
           data-testid="signup-seller"
-          onChange={ () => {
-            if (role === 'client') {
-              setRole('administrator');
-            } else {
-              setRole('client');
-            }
-          } }
+          onClick={() => setisCheked(!isCheked)}
         />
         <div>
           <button
             type="submit"
             data-testid="signup-btn"
-            disabled={ !validationRegister() }
+            disabled={!validationRegister()}
           >
             Cadastrar
           </button>

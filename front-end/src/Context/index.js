@@ -11,7 +11,7 @@ const AplicationProvider = ({ children }) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('client');
+  const [role, setRole] = useState(false);
 
   const context = {
     disableButton,
@@ -30,7 +30,7 @@ const AplicationProvider = ({ children }) => {
 
   return (
     <div>
-      <ContextPlication.Provider value={ context }>
+      <ContextPlication.Provider value={context}>
         {children}
       </ContextPlication.Provider>
     </div>

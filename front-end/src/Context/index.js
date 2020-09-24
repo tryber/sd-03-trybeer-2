@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export const ContextPlication = createContext();
+export const ContextAplication = createContext();
 
 const infoUser = { email: '', password: '' };
 
@@ -30,9 +30,9 @@ const AplicationProvider = ({ children }) => {
 
   return (
     <div>
-      <ContextPlication.Provider value={ context }>
+      <ContextAplication.Provider value={ context }>
         {children}
-      </ContextPlication.Provider>
+      </ContextAplication.Provider>
     </div>
   );
 };

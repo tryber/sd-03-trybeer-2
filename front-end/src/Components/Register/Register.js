@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ContextPlication } from '../../Context';
+import { ContextAplication } from '../../Context';
 
 const Register = () => {
   const {
@@ -11,7 +11,7 @@ const Register = () => {
     setEmail,
     role,
     setRole,
-  } = useContext(ContextPlication);
+  } = useContext(ContextAplication);
 
   const nameInvalid = 12;
   const passwordInvalid = 6;
@@ -22,7 +22,7 @@ const Register = () => {
   const validationRegister = () => (
     (name.length >= nameInvalid && validName.test(name))
     && (password.length >= passwordInvalid && typeof password !== 'number')
-    && (validEmail.test(email) && (email === email))
+    && (validEmail.test(email))
   );
 
   return (

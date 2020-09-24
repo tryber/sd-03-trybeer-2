@@ -37,22 +37,26 @@ const FormInput = () => {
     <div>
       <h1>Login</h1>
       <form onSubmit={ singIn }>
-        <input
-          className="buttons"
-          placeholder="Email"
-          data-testid="email-input"
-          onChange={ ({ target }) => handleChangeInput('email', target.value, user, setUser) }
-          type="email"
-          required
-        />
-        <input
-          className="buttons"
-          data-testid="password-input"
-          onChange={ ({ target }) => handleChangeInput('password', target.value, user, setUser) }
-          placeholder="Senha"
-          required
-          type="password"
-        />
+        <label htmlFor="email" data-testid="email-input">
+          Email
+          <input
+            className="buttons"
+            onChange={ ({ target }) => handleChangeInput('email', target.value, user, setUser) }
+            name="email"
+            type="email"
+            required
+          />
+        </label>
+        <label htmlFor="password" data-testid="password-input">
+          Password
+          <input
+            className="buttons"
+            onChange={ ({ target }) => handleChangeInput('password', target.value, user, setUser) }
+            name="password"
+            required
+            type="password"
+          />
+        </label>
         <ButtonEnter />
       </form>
     </div>

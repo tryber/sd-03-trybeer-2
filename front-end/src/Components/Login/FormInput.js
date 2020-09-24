@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { ContextPlication } from '../../Context';
 import api from '../../Services/api';
 import { login } from '../../Services/auth';
@@ -13,6 +14,7 @@ const minPassword = 6;
 
 const FormInput = () => {
   const { setUser, user, setDisableButton } = useContext(ContextPlication);
+  const history = useHistory();
 
   useEffect(() => {
     if (!validEmailRegEx.test(user.email) || (user.password.length < minPassword)) {
@@ -27,6 +29,7 @@ const FormInput = () => {
     try {
       const response = await api.post('/login', { email, password });
       login(response.data);
+      history.push('/products');
     } catch (err) {
       return err;
     }

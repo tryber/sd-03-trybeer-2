@@ -5,7 +5,7 @@ import PrivateRoute from './PrivateRoute';
 
 const Routers = () => (
   <Switch>
-    <Route exact path="/" component={ Login } />
+    <Route exact path="/login" component={ Login } />
     <PrivateRoute path="/app" component={ () => <h1>Funcionando</h1> } />
   </Switch>
 );

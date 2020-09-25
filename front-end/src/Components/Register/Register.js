@@ -1,5 +1,6 @@
-import React, { useContext, useEffect,useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ContextPlication } from '../../Context';
+import api from '../../Services/api';
 
 const nameInvalid = 12;
 const passwordInvalid = 6;
@@ -36,12 +37,23 @@ const Register = () => {
     && (validEmail.test(email))
   );
 
+  const handClick = async (e) => {
+    e.preventDefault();
+    try {
+      const verification = await api.post('/verificar', { email });
+      console.log(verification.data.message);
+    } catch (err) {
+      return err;
+    }
+    return null;
+  };
 
   return (
     <form>
       <h1>Registro</h1>
       <div>Nome</div>
       <input
+        type="text"
         className="buttonRegister"
         data-testid="signup-name"
         onChange={(event) => setName(event.target.value)}
@@ -69,6 +81,7 @@ const Register = () => {
         />
         <div>
           <button
+            onClick={handClick}
             type="submit"
             data-testid="signup-btn"
             disabled={!validationRegister()}

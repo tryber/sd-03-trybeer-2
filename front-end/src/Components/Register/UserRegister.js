@@ -29,7 +29,7 @@ const UserRegister = () => {
   } = registerUser;
 
   const [isCheked, setisCheked] = useState(false);
-  const [emailUsed, setemailUsed] = useState('')
+  const [emailUsed, setemailUsed] = useState('');
 
   const history = useHistory();
 
@@ -49,11 +49,11 @@ const UserRegister = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-        await api.post('/register', {
-        name,
-        email,
-        password,
-        role,
+      await api.post('/register', {
+      name,
+      email,
+      password,
+      role,
       });
       const response = await api.post('/login', { email, password });
       login(response.data);
@@ -65,7 +65,7 @@ const UserRegister = () => {
     } return null;
   };
 
-  if(emailUsed) return <p>{emailUsed}</p>
+  if (emailUsed) return <p>{emailUsed}</p>
 
   return (
     <form onSubmit={ submitForm }>

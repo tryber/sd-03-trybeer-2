@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../../Context';
 import api from '../../Services/api';
@@ -25,20 +25,12 @@ const UserRegister = () => {
     name = 'a',
     password,
     email,
-    role,
   } = registerUser;
 
   const [isCheked, setisCheked] = useState(false);
   const [emailUsed, setemailUsed] = useState('');
 
   const history = useHistory();
-
-  useEffect(() => {
-    if (isCheked) {
-      return setregisterUser({ ...registerUser, role: 'administrator' });
-    }
-    return setregisterUser({ ...registerUser, role: 'client' });
-  }, [isCheked]);
 
   const validationRegister = () => (
     (name.length >= nameInvalid && validName.test(name))
@@ -48,6 +40,7 @@ const UserRegister = () => {
 
   const submitForm = async (e) => {
     e.preventDefault();
+    const role = (isCheked) ? 'administrator' : 'client';
     try {
       await api.post('/register', {
         name,

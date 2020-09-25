@@ -29,11 +29,9 @@ const FormInput = () => {
     try {
       const response = await api.post('/login', { email, password });
       console.log(response)
-      if (response.data.status === 200) {
-        login(response.data);
-        return history.push('/products');
-      }
-      return history.push('/login');
+      if (response.data.status === 400) return history.push('/login');
+      login(response.data);
+      return history.push('/products');
     } catch (err) {
       return err;
     }

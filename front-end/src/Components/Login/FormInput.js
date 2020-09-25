@@ -28,12 +28,15 @@ const FormInput = () => {
     const { email, password } = user;
     try {
       const response = await api.post('/login', { email, password });
-      login(response.data);
-      history.push('/products');
+      console.log(response)
+      if (response.data.status === 200) {
+        login(response.data);
+        return history.push('/products');
+      }
+      return history.push('/login');
     } catch (err) {
       return err;
     }
-    return null;
   };
 
   return (

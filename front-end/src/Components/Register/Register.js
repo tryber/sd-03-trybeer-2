@@ -20,23 +20,22 @@ const Register = () => {
     setregisterUser,
   } = useContext(ContextAplication);
 
-  const { name ='a', password, email, role } = registerUser;
-  console.log(registerUser)
+  const { name = 'a', password, email, role } = registerUser;
   const [isCheked, setisCheked] = useState(false)
   const history = useHistory();
 
   useEffect(() => {
     if (isCheked) {
-      return setregisterUser({ ...registerUser, role:'administrator' });
+      return setregisterUser({ ...registerUser, role: 'administrator' });
     }
     setregisterUser({ ...registerUser, role: 'client' });
   }, [isCheked])
 
-    const validationRegister = () => (
-      (name.length >= nameInvalid && validName.test(name))
-      && (password >= passwordInvalid && typeof password !== 'number')
-      && (validEmail.test(email))
-    );
+  const validationRegister = () => (
+    (name.length >= nameInvalid && validName.test(name))
+    && (password >= passwordInvalid && typeof password !== 'number')
+    && (validEmail.test(email))
+  );
 
   const submitForm = async (e) => {
     e.preventDefault();

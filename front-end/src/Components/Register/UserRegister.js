@@ -50,10 +50,10 @@ const UserRegister = () => {
     e.preventDefault();
     try {
       await api.post('/register', {
-      name,
-      email,
-      password,
-      role,
+        name,
+        email,
+        password,
+        role,
       });
       const response = await api.post('/login', { email, password });
       login(response.data);
@@ -65,7 +65,7 @@ const UserRegister = () => {
     } return null;
   };
 
-  if (emailUsed) return <p>{emailUsed}</p>
+  if (emailUsed) return <p>{emailUsed}</p>;
 
   return (
     <form onSubmit={ submitForm }>

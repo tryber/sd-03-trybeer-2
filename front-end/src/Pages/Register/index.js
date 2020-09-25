@@ -1,8 +1,7 @@
 import React from 'react';
 import UserRegister from '../../Components/Register/UserRegister';
 
-const Register = () => (
-  <div>
+const Register = () => (<div>
     <UserRegister />
   </div>
 );

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ContextPlication } from '../../Context';
+import { ContextAplication } from '../../Context';
 
 const Register = () => {
   const {
@@ -11,7 +11,7 @@ const Register = () => {
     setEmail,
     role,
     setRole,
-  } = useContext(ContextPlication);
+  } = useContext(ContextAplication);
 
   const nameInvalid = 12;
   const passwordInvalid = 6;
@@ -41,14 +41,14 @@ const Register = () => {
         type="email"
         onChange={ (event) => setEmail(event.target.value) }
       />
-      <div>Senha</div>
+      <div>Password</div>
       <input
         className="buttonPassword"
         data-testid="signup-password"
         onChange={ (event) => setPassword(event.target.value) }
       />
       <div>
-        Quero vender
+        Quero Vender
         <input
           type="checkbox"
           data-testid="signup-seller"
@@ -66,7 +66,7 @@ const Register = () => {
             data-testid="signup-btn"
             disabled={ !validationRegister() }
           >
-            Cadastro
+            Cadastrar
           </button>
         </div>
       </div>

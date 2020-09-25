@@ -25,9 +25,8 @@ const Register = () => {
     name = 'a',
     password,
     email,
-    role
-  }
-    = registerUser;
+    role,
+  }= registerUser;
 
   const [isCheked, setisCheked] = useState(false);
 
@@ -49,10 +48,12 @@ const Register = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     try {
+
       await api.post('/register', { name, email, password, role });
-      const response = await api.post('/login', { email, password })
+      const response = await api.post('/login', { email, password });
       login(response.data);
       history.push('/products');
+
     } catch
     (err) {
       return err;
@@ -60,7 +61,7 @@ const Register = () => {
   };
 
   return (
-    <form onSubmit={submitForm}>
+    <form onSubmit={ submitForm }>
       <h1>Registro</h1>
       <div>Nome</div>
       <input

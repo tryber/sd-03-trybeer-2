@@ -11,7 +11,7 @@ const Routers = () => (
     <Route exact path="/" component={ Home } />
     <Route exact path="/login" component={ Login } />
     <Route exact path="/register" component={ Register } />
-    <PrivateRoute exact path="/admin/orders" component={ () => <div>Funcionando</div>} />
+    <PrivateRoute exact path="/admin/orders" component={ () => <div>Funcionando</div> } />
     <PrivateRoute exact path="/products" component={ ClientProducs } />
   </Switch>
 );

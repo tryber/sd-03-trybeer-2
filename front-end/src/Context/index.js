@@ -40,7 +40,7 @@ const AplicationProvider = ({ children }) => {
 
   return (
     <div>
-      <ContextAplication.Provider value={context}>
+      <ContextAplication.Provider value={ context }>
         {children}
       </ContextAplication.Provider>
     </div>

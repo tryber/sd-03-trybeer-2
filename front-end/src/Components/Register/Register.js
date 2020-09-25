@@ -21,11 +21,13 @@ const Register = () => {
   } = useContext(ContextAplication);
 
   const {
+
     name = 'a',
     password,
     email,
     role
-  } = registerUser;
+  }
+    = registerUser;
 
   const [isCheked, setisCheked] = useState(false);
 

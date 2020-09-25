@@ -36,7 +36,7 @@ const Register = () => {
     if (isCheked) {
       return setregisterUser({ ...registerUser, role: 'administrator' });
     }
-    setregisterUser({ ...registerUser, role: 'client' });
+    return setregisterUser({ ...registerUser, role: 'client' });
   }, [isCheked]);
 
   const validationRegister = () => (

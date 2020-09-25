@@ -21,7 +21,7 @@ app.post('/verificar', async (req, res) => {
   if (!email) {
     return res.status(400).json({ message: 'Sem email na solicitação' });
   } if (verifyRegistration) {
-    return res.status(400).json({ message: 'Email já cadastrado' });
+    return res.status(400).json({ message: 'Email já cadastrado' });//E-mail already in database//
   }
   return res.status(200).json({ message: 'Email disponível' });
 });

@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ContextPlication } from '../../Context';
+import { useHistory } from "react-router-dom";
+import { ContextAplication } from '../../Context';
 import api from '../../Services/api';
+import { login } from '../../Services/auth';
 
 const nameInvalid = 12;
 const passwordInvalid = 6;
@@ -8,69 +10,71 @@ const passwordInvalid = 6;
 const validEmail = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 const validName = /[A-Z-a-z]+$/i;
 
+const handleChangeInput = (name, event, input, setregisterUser) => {
+  setregisterUser({ ...input, [name]: event });
+};
+
 const Register = () => {
   const {
-    name,
-    setName,
-    password,
-    setPassword,
-    email,
-    setEmail,
-    role,
-    setRole,
-  } = useContext(ContextPlication);
+    registerUser,
+    setregisterUser,
+  } = useContext(ContextAplication);
 
+  const { name ='a', password, email, role } = registerUser;
+  console.log(registerUser)
   const [isCheked, setisCheked] = useState(false)
+  const history = useHistory();
 
   useEffect(() => {
     if (isCheked) {
-      return setRole('administrator');
+      return setregisterUser({ ...registerUser, role:'administrator' });
     }
-    setRole('client');
+    setregisterUser({ ...registerUser, role: 'client' });
   }, [isCheked])
 
-  console.log(role);
+    const validationRegister = () => (
+      (name.length >= nameInvalid && validName.test(name))
+      && (password >= passwordInvalid && typeof password !== 'number')
+      && (validEmail.test(email))
+    );
 
-  const validationRegister = () => (
-    (name.length >= nameInvalid && validName.test(name))
-    && (password.length >= passwordInvalid && typeof password !== 'number')
-    && (validEmail.test(email))
-  );
-
-  const handClick = async (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
+    console.log('funcionando');
     try {
-      const verification = await api.post('/verificar', { email });
-      console.log(verification.data.message);
-    } catch (err) {
+      await api.post('/register', { name, email, password, role });
+      const response = await api.post('/login', { email, password })
+      login(response.data);
+      history.push('/products');
+    } catch
+    (err) {
       return err;
-    }
-    return null;
-  };
+    } return null;
+  }
 
   return (
-    <form>
+    <form onSubmit={submitForm}>
       <h1>Registro</h1>
       <div>Nome</div>
       <input
         type="text"
         className="buttonRegister"
         data-testid="signup-name"
-        onChange={(event) => setName(event.target.value)}
+        onChange={({ target }) => handleChangeInput('name', target.value, registerUser, setregisterUser)}
       />
       <div>Email</div>
       <input
         className="buttonEmail"
         data-testid="signup-email"
         type="email"
-        onChange={(event) => setEmail(event.target.value)}
+        onChange={({ target }) => handleChangeInput('email', target.value, registerUser, setregisterUser)}
       />
       <div>Password</div>
       <input
         className="buttonPassword"
         data-testid="signup-password"
         type="password"
-        onChange={(event) => setPassword(event.target.value)}
+        onChange={({ target }) => handleChangeInput('password', target.value, registerUser, setregisterUser)}
       />
       <div>
         Quero Vender
@@ -81,7 +85,6 @@ const Register = () => {
         />
         <div>
           <button
-            onClick={handClick}
             type="submit"
             data-testid="signup-btn"
             disabled={!validationRegister()}

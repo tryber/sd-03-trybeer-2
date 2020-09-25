@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ContextPlication } from '../../Context';
+import { ContextAplication } from '../../Context';
 import api from '../../Services/api';
 import { login } from '../../Services/auth';
 import ButtonEnter from './ButtonEnter';
@@ -13,7 +13,7 @@ const validEmailRegEx = /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([.][A-Z0-9_'%=+!`#~$*?^{}&
 const minPassword = 6;
 
 const FormInput = () => {
-  const { setUser, user, setDisableButton } = useContext(ContextPlication);
+  const { setUser, user, setDisableButton } = useContext(ContextAplication);
   const history = useHistory();
 
   useEffect(() => {

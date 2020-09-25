@@ -1,9 +1,15 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export const ContextPlication = createContext();
+export const ContextAplication = createContext();
 
 const infoUser = { email: '', password: '' };
+const dateUser = {
+  name: '',
+  email: '',
+  password: '',
+  role: 'client',
+};
 
 const AplicationProvider = ({ children }) => {
   const [user, setUser] = useState(infoUser);
@@ -13,7 +19,11 @@ const AplicationProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [role, setRole] = useState(false);
 
+  const [registerUser, setregisterUser] = useState(dateUser);
+
   const context = {
+    registerUser,
+    setregisterUser,
     disableButton,
     setDisableButton,
     user,
@@ -30,9 +40,9 @@ const AplicationProvider = ({ children }) => {
 
   return (
     <div>
-      <ContextPlication.Provider value={context}>
+      <ContextAplication.Provider value={context}>
         {children}
-      </ContextPlication.Provider>
+      </ContextAplication.Provider>
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { ContextPlication } from '../../Context';
+import { ContextAplication } from '../../Context';
 
 const ButtonEnter = () => {
-  const { disableButton } = useContext(ContextPlication);
+  const { disableButton } = useContext(ContextAplication);
   return (
     <div>
       <button

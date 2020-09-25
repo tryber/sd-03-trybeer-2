@@ -14,7 +14,7 @@ const handleChangeInput = (name, event, input, setregisterUser) => {
   setregisterUser({ ...input, [name]: event });
 };
 
-const Register = () => {
+const UserRegister = () => {
   const {
     registerUser,
     setregisterUser,
@@ -29,6 +29,7 @@ const Register = () => {
   } = registerUser;
 
   const [isCheked, setisCheked] = useState(false);
+  const [emailUsed, setemailUsed] = useState('')
 
   const history = useHistory();
 
@@ -48,7 +49,7 @@ const Register = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-      await api.post('/register', {
+        await api.post('/register', {
         name,
         email,
         password,
@@ -59,9 +60,12 @@ const Register = () => {
       history.push('/products');
     } catch
     (err) {
-      return err;
+      const usedEmail = err.response.data.message;
+      return setemailUsed(usedEmail);
     } return null;
   };
+
+  if(emailUsed) return <p>{emailUsed}</p>
 
   return (
     <form onSubmit={ submitForm }>
@@ -108,4 +112,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default UserRegister;

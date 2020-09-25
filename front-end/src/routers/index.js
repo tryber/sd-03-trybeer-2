@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import ClientProducs from '../Components/Products/ClientProducs';
 import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login';
-import Register from '../Components/Register/Register';
+import Register from '../Pages/Register';
 import PrivateRoute from './PrivateRoute';
 
 const Routers = () => (

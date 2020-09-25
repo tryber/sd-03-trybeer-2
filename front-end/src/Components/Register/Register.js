@@ -20,8 +20,13 @@ const Register = () => {
     setregisterUser,
   } = useContext(ContextAplication);
 
-  const { name = 'a', password, email, role } = registerUser;
-  
+  const {
+    name = 'a',
+    password,
+    email,
+    role
+  } = registerUser;
+
   const [isCheked, setisCheked] = useState(false);
 
   const history = useHistory();
@@ -51,7 +56,7 @@ const Register = () => {
     (err) {
       return err;
     } return null;
-  }
+  };
 
   return (
     <form onSubmit={submitForm}>
@@ -61,34 +66,34 @@ const Register = () => {
         type="text"
         className="buttonRegister"
         data-testid="signup-name"
-        onChange={ ({ target }) => handleChangeInput('name', target.value, registerUser, setregisterUser) }
+        onChange={({ target }) => handleChangeInput('name', target.value, registerUser, setregisterUser)}
       />
       <div>Email</div>
       <input
         className="buttonEmail"
         data-testid="signup-email"
         type="email"
-        onChange={ ({ target }) => handleChangeInput('email', target.value, registerUser, setregisterUser) }
+        onChange={({ target }) => handleChangeInput('email', target.value, registerUser, setregisterUser)}
       />
       <div>Password</div>
       <input
         className="buttonPassword"
         data-testid="signup-password"
         type="password"
-        onChange={ ({ target }) => handleChangeInput('password', target.value, registerUser, setregisterUser) }
+        onChange={({ target }) => handleChangeInput('password', target.value, registerUser, setregisterUser)}
       />
       <div>
         Quero Vender
         <input
           type="checkbox"
           data-testid="signup-seller"
-          onClick={ () => setisCheked(!isCheked) }
+          onClick={() => setisCheked(!isCheked)}
         />
         <div>
           <button
             type="submit"
             data-testid="signup-btn"
-            disabled={ !validationRegister() }
+            disabled={!validationRegister()}
           >
             Cadastrar
           </button>

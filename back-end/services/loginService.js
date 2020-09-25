@@ -11,7 +11,7 @@ const loginService = async (userEmail, userPassword) => {
     const token = jwt.sign(userObject, process.env.SECRET, { expiresIn: '10m', algorithm: 'HS256' });
     return token;
   }
-  return false;
+  return { message: 'Não autorizado' };
 };
 
 module.exports = loginService;

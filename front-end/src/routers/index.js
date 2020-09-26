@@ -5,6 +5,7 @@ import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login';
 import Register from '../Components/Register/Register';
 import PrivateRoute from './PrivateRoute';
+import Profile from '../Pages/Profile';
 
 const Routers = () => (
   <Switch>
@@ -13,6 +14,7 @@ const Routers = () => (
     <Route exact path="/register" component={ Register } />
     <PrivateRoute exact path="/admin/orders" component={ () => <div>Funcionando</div> } />
     <PrivateRoute exact path="/products" component={ ClientProducs } />
+    <PrivateRoute exact path="/profile" component={ Profile } />
   </Switch>
 );
 

@@ -1,9 +1,8 @@
-const store = require('store');
 const profileUpdateService = require('../services/profileUpdateService');
 
 const profileController = async (req, res) => {
   try {
-    const profileToken = await store.get('token');
+    const profileToken = req.body.token;
     const newName = req.body.name;
     const updateProfile = await profileUpdateService(newName, profileToken);
     if (updateProfile) return res.sendStatus(200);

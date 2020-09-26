@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import menu from '../../images/Menu/Menu.png';
+import menu from '../../assets/Menu/Menu.png';
 import ProductsButton from './ProductsButton';
 import MyRequestsButton from './MyRequestsButton';
 import MyProfileButtton from './MyProfileButton';
@@ -11,15 +11,16 @@ const TopMenu = () => {
   return (
     <div>
       <div>
-        <button 
+        <button
+          type="button"
           data-testid="top-hamburguer"
-          onClick={() => setDivDisabled(!divDisabled)}
+          onClick={ () => setDivDisabled(!divDisabled) }
         >
-          <img src={menu} alt="Menu Superior" width="50px" />
+          <img src={ menu } alt="Menu Superior" width="50px" />
         </button>
-        <div 
+        <div
           className="side-menu-container"
-          style={{ display: (divDisabled ? 'block' : 'none') }}
+          style={ { display: (divDisabled ? 'block' : 'none') } }
         >
           <ProductsButton />
           <MyRequestsButton />
@@ -29,7 +30,7 @@ const TopMenu = () => {
       </div>
       <h1 data-testid="top-title">TryBeer</h1>
     </div>
-);
+  );
 };
 
 export default TopMenu;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-
 const MyRequestsButton = () => {
   const history = useHistory();
 
@@ -15,7 +14,7 @@ const MyRequestsButton = () => {
         Meus Pedidos
       </button>
     </div>
-  )
-}
+  );
+};
 
 export default MyRequestsButton;

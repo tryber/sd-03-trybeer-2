@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../../Context';
 import api from '../../Services/api';
-import { login } from '../../Services/auth';
+import { login } from '../../Services';
 import ButtonEnter from './ButtonEnter';
 
 const handleChangeInput = (name, event, input, setUser) => {
@@ -28,12 +28,12 @@ const FormInput = () => {
     const { email, password } = user;
     try {
       const response = await api.post('/login', { email, password });
+      if (response.data.status === 400) return history.push('/login');
       login(response.data);
-      history.push('/products');
+      return history.push('/products');
     } catch (err) {
       return err;
     }
-    return null;
   };
 
   return (

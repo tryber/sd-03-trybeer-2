@@ -1,11 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { logout } from '../../Services/auth';
+import { logout } from '../../Services';
 
 const exit = (history) => {
   logout('token');
   return history.push('/login');
-}
+};
 
 const LogoutButton = () => {
   const history = useHistory();
@@ -20,7 +20,7 @@ const LogoutButton = () => {
         Sair
       </button>
     </div>
-  )
-}
+  );
+};
 
 export default LogoutButton;

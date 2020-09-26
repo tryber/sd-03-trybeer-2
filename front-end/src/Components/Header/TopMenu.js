@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import menu from '../../images/Menu/Menu.png';
+import menu from '../../assets/Menu/Menu.png';
 import ProductsButton from './ProductsButton';
 import MyRequestsButton from './MyRequestsButton';
 import MyProfileButtton from './MyProfileButton';
@@ -12,6 +12,7 @@ const TopMenu = () => {
     <div>
       <div>
         <button
+          type="button"
           data-testid="top-hamburguer"
           onClick={ () => setDivDisabled(!divDisabled) }
         >

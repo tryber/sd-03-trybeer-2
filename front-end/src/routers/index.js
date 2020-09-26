@@ -15,6 +15,7 @@ const Routers = () => (
     <PrivateRoute exact path="/admin/orders" component={ () => <div>Funcionando</div> } />
     <PrivateRoute exact path="/products" component={ ClientProducs } />
     <PrivateRoute exact path="/profile" component={ Profile } />
+    <Route exact path="/checkout" component={ () => <div>Cliente - Checkout</div> } />
   </Switch>
 );
 

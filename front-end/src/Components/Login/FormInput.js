@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../../Context';
 import api from '../../Services/api';
-import { login } from '../../Services/auth';
+import { login } from '../../Services';
 import ButtonEnter from './ButtonEnter';
 
 const handleChangeInput = (name, event, input, setUser) => {

@@ -7,7 +7,7 @@ const Form = () => {
   const { name, setName } = useContext(ContextAplication);
   const submitForm = async (e) => {
     e.preventDefault();
-    if (name.length < 12) return false;
+    if (name.length < maxNameSize) return false;
     try {
       const token = localStorage.getItem('token');
       await api.post('/profile', { token, name });
@@ -16,6 +16,9 @@ const Form = () => {
   };
 
   const updateName = (newName) => setName(newName);
+
+  const maxNameSize = 12;
+
   const getEmail = () => {
     const token = JSON.parse(localStorage.getItem('token'));
     return decode(token).email;
@@ -46,7 +49,7 @@ const Form = () => {
             onChange={ (e) => updateName(e.target.value) }
           />
         </label>
-        <button disabled={ name.length < 12 } type="submit">Salvar</button>
+        <button disabled={ name.length < maxNameSize } type="submit">Salvar</button>
       </form>
     </div>
   );

@@ -1,8 +1,8 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import skol from '../assets/Beers/Skol 269ml.jpg'
-import skol1 from '../assets/Beers/Skol 269ml.jpg'
-import skol2 from '../assets/Beers/Skol 269ml.jpg'
+import skol from '../assets/Beers/Skol 269ml.jpg';
+import skol1 from '../assets/Beers/Skol 269ml.jpg';
+import skol2 from '../assets/Beers/Skol 269ml.jpg';
 import { getCart } from '../Services';
 
 export const ContextAplication = createContext();
@@ -28,7 +28,7 @@ const products = [
     image: skol2,
     quantity: 0,
   },
-]
+];
 
 const AplicationProvider = ({ children }) => {
   const [user, setUser] = useState(infoUser);
@@ -38,7 +38,7 @@ const AplicationProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('client');
   const [showProducts, setShowProducts] = useState(products);
-  const [cart, setCart] = useState(getCart('cart') || [])
+  const [cart, setCart] = useState(getCart('cart') || []);
 
   const context = {
     disableButton,

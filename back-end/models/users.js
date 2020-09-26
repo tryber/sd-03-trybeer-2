@@ -32,13 +32,19 @@ const registerUser = async ({ name, email, password, role }) => connection()
     .values([name, email, password, role])
     .execute());
 
+const updateUser = async (email, name) => connection()
+  .then((db) => db
+    .getTable('users')
+    .update()
+    .set('name', name)
+    .where('email = :email')
+    .bind('email', email)
+    .execute());
+
 module.exports = {
   verifyIfExists,
   registerUser,
   verfiyPassword,
   getInfo,
+  updateUser,
 };
-// return session.getSchema('mySchema').getTable('myTable')
-//                     .insert(['name', 'age'])
-//                     .values(['foo', 42])
-//                     .execute();

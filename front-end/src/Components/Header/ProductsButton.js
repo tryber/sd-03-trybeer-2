@@ -14,7 +14,7 @@ const ProductsButton = () => {
         Produtos
       </button>
     </div>
-  )
-}
+  );
+};
 
 export default ProductsButton;

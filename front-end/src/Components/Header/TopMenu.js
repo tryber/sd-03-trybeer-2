@@ -11,15 +11,15 @@ const TopMenu = () => {
   return (
     <div>
       <div>
-        <button 
+        <button
           data-testid="top-hamburguer"
-          onClick={() => setDivDisabled(!divDisabled)}
+          onClick={ () => setDivDisabled(!divDisabled) }
         >
-          <img src={menu} alt="Menu Superior" width="50px" />
+          <img src={ menu } alt="Menu Superior" width="50px" />
         </button>
-        <div 
+        <div
           className="side-menu-container"
-          style={{ display: (divDisabled ? 'block' : 'none') }}
+          style={ { display: (divDisabled ? 'block' : 'none') } }
         >
           <ProductsButton />
           <MyRequestsButton />
@@ -29,7 +29,7 @@ const TopMenu = () => {
       </div>
       <h1 data-testid="top-title">TryBeer</h1>
     </div>
-);
+  );
 };
 
 export default TopMenu;

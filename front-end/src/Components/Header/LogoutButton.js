@@ -5,7 +5,7 @@ import { logout } from '../../Services/auth';
 const exit = (history) => {
   logout('token');
   return history.push('/login');
-}
+};
 
 const LogoutButton = () => {
   const history = useHistory();
@@ -20,7 +20,7 @@ const LogoutButton = () => {
         Sair
       </button>
     </div>
-  )
-}
+  );
+};
 
 export default LogoutButton;

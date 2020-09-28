@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { ContextAplication } from '../../Context';
 import { updateCart } from '../../Services';
 
-const handleChange = (name, price, cart, setCart, qnt) => {
+const handleChange = (name, price, cart, setCart) => {
   setCart([ ...cart, { name, price } ]);
 };
 
@@ -10,7 +10,6 @@ const ButtonPlus = ({ idx }) => {
   const { showProducts, cart, setCart } = useContext(ContextAplication);
   const { name, price, quantity } = showProducts[idx];
 
-  console.log(quantity)
   useEffect(() => {
     updateCart([ ...cart ]);
   }, [cart])

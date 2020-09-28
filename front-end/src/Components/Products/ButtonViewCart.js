@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-
+import { ContextAplication } from '../../Context';
 
 const ButtonViewCart = () => {
+  const { cart } = useContext(ContextAplication);
   const history = useHistory();
+
+  const totalValue = cart.reduce((acc, { price }) => {
+    return acc + price
+  }, 0)
 
   return (
     <div>
@@ -13,7 +18,7 @@ const ButtonViewCart = () => {
         onClick={() => history.push('/checkout')}
       >
         Ver Carrinho
-        <p data-testid="checkout-bottom-btn-value">Total Price</p>
+        <p data-testid="checkout-bottom-btn-value">{ totalValue }</p>
       </button>
     </div>
   )

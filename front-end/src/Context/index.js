@@ -1,8 +1,6 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import skol from '../assets/Beers/Skol 269ml.jpg';
-import skol1 from '../assets/Beers/Skol 269ml.jpg';
-import skol2 from '../assets/Beers/Skol 269ml.jpg';
 import { getCart } from '../Services';
 
 export const ContextAplication = createContext();
@@ -12,20 +10,20 @@ const infoUser = { email: '', password: '' };
 const products = [
   {
     name: 'Skol Lata 250ml',
-    price: 'R$ 2.20',
+    price: 2.20,
     image: skol,
     quantity: 0,
   },
   {
     name: 'Heineken 600ml',
-    price: 'R$ 7.50',
-    image: skol1,
+    price: 7.50,
+    image: skol,
     quantity: 0,
   },
   {
     name: 'Antarctica Pilsen 300ml',
-    price: 'R$ 2.49',
-    image: skol2,
+    price: 2.49,
+    image: skol,
     quantity: 0,
   },
 ];

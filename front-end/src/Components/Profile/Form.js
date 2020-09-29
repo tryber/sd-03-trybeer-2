@@ -3,6 +3,8 @@ import decode from 'jwt-decode';
 import api from '../../Services/api';
 import { ContextAplication } from '../../Context';
 
+const maxNameSize = 12;
+
 const Form = () => {
   const { name, setName } = useContext(ContextAplication);
   const submitForm = async (e) => {
@@ -12,12 +14,13 @@ const Form = () => {
       const token = localStorage.getItem('token');
       await api.post('/profile', { token, name });
       setName('');
-    } catch (error) {}
+    } catch (error) {
+      return error;
+    }
+    return false;
   };
 
   const updateName = (newName) => setName(newName);
-
-  const maxNameSize = 12;
 
   const getEmail = () => {
     const token = JSON.parse(localStorage.getItem('token'));
@@ -49,7 +52,9 @@ const Form = () => {
             onChange={ (e) => updateName(e.target.value) }
           />
         </label>
-        <button disabled={ name.length < maxNameSize } type="submit">Salvar</button>
+        <button disabled={ name.length < maxNameSize } type="submit">
+          Salvar
+        </button>
       </form>
     </div>
   );

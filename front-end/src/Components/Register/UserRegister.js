@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../../Context';
 import api from '../../Services/api';
-import { login } from '../../Services/auth';
+import { login } from '../../Services';
 
 const nameInvalid = 12;
 const passwordInvalid = 6;

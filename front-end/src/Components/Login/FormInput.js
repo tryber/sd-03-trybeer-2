@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../../Context';
 import api from '../../Services/api';
-import { login } from '../../Services/auth';
+import { login } from '../../Services';
 import ButtonEnter from './ButtonEnter';
 
 const handleChangeInput = (name, event, input, setUser) => {
@@ -11,6 +11,7 @@ const handleChangeInput = (name, event, input, setUser) => {
 
 const validEmailRegEx = /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([.][A-Z0-9_'%=+!`#~$*?^{}&|-]+)*@[A-Z0-9-]+(\.[A-Z0-9-]+)+$/i;
 const minPassword = 6;
+const status = 400;
 
 const FormInput = () => {
   const { setUser, user, setDisableButton } = useContext(ContextAplication);
@@ -28,8 +29,7 @@ const FormInput = () => {
     const { email, password } = user;
     try {
       const response = await api.post('/login', { email, password });
-      console.log(response)
-      if (response.data.status === 400) return history.push('/login');
+      if (response.data.status === status) return history.push('/login');
       login(response.data);
       return history.push('/products');
     } catch (err) {

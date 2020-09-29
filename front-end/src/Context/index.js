@@ -1,5 +1,7 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import skol from '../assets/Beers/Skol 269ml.jpg';
+import { getCart } from '../Services';
 
 export const ContextAplication = createContext();
 
@@ -11,7 +13,26 @@ const dateUser = {
   role: 'client',
 };
 
-const adressPost = { rua:'', numero:'' };
+const products = [
+  {
+    name: 'Skol Lata 250ml',
+    price: 2.20,
+    image: skol,
+    quantity: 0,
+  },
+  {
+    name: 'Heineken 600ml',
+    price: 7.50,
+    image: skol,
+    quantity: 0,
+  },
+  {
+    name: 'Antarctica Pilsen 300ml',
+    price: 2.49,
+    image: skol,
+    quantity: 0,
+  },
+];
 
 const AplicationProvider = ({ children }) => {
   const [user, setUser] = useState(infoUser);
@@ -20,9 +41,9 @@ const AplicationProvider = ({ children }) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState(false);
-
-  const []
   const [registerUser, setregisterUser] = useState(dateUser);
+  const [showProducts, setShowProducts] = useState(products);
+  const [cart, setCart] = useState(getCart('cart') || []);
 
   const context = {
     registerUser,
@@ -39,6 +60,10 @@ const AplicationProvider = ({ children }) => {
     setEmail,
     role,
     setRole,
+    showProducts,
+    setShowProducts,
+    cart,
+    setCart,
   };
 
   return (

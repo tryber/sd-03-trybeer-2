@@ -11,6 +11,8 @@ const dateUser = {
   role: 'client',
 };
 
+const adressPost = { rua:'', numero:'' };
+
 const AplicationProvider = ({ children }) => {
   const [user, setUser] = useState(infoUser);
   const [disableButton, setDisableButton] = useState(true);
@@ -19,6 +21,7 @@ const AplicationProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [role, setRole] = useState(false);
 
+  const []
   const [registerUser, setregisterUser] = useState(dateUser);
 
   const context = {

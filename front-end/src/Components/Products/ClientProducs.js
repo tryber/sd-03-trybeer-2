@@ -1,8 +1,4 @@
 import React, { useEffect, useContext } from 'react';
-<<<<<<< HEAD
-
-=======
->>>>>>> 6c0cc51237327fffda538a57e89d01e5665e7cbe
 import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../../Context';
 import JwtDecode from '../../Services/JwtDecode';

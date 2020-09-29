@@ -1,8 +1,6 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import skol from '../assets/Beers/Skol 269ml.jpg';
-import skol1 from '../assets/Beers/Skol 269ml.jpg';
-import skol2 from '../assets/Beers/Skol 269ml.jpg';
 import { getCart } from '../Services';
 
 export const ContextAplication = createContext();
@@ -19,13 +17,13 @@ const products = [
   {
     name: 'Heineken 600ml',
     price: 7.50,
-    image: skol1,
+    image: skol,
     quantity: 0,
   },
   {
     name: 'Antarctica Pilsen 300ml',
     price: 2.49,
-    image: skol2,
+    image: skol,
     quantity: 0,
   },
 ];
@@ -38,7 +36,7 @@ const AplicationProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('client');
   const [showProducts, setShowProducts] = useState(products);
-  const [cart, setCart] = useState(getCart('cart') || [])
+  const [cart, setCart] = useState(getCart('cart') || []);
 
   const context = {
     disableButton,

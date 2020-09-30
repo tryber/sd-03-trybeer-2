@@ -6,6 +6,12 @@ import { getCart } from '../Services';
 export const ContextAplication = createContext();
 
 const infoUser = { email: '', password: '' };
+const dateUser = {
+  name: '',
+  email: '',
+  password: '',
+  role: 'client',
+};
 
 const products = [
   {
@@ -34,11 +40,14 @@ const AplicationProvider = ({ children }) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('client');
+  const [role, setRole] = useState(false);
+  const [registerUser, setregisterUser] = useState(dateUser);
   const [showProducts, setShowProducts] = useState(products);
   const [cart, setCart] = useState(getCart('cart') || []);
 
   const context = {
+    registerUser,
+    setregisterUser,
     disableButton,
     setDisableButton,
     user,

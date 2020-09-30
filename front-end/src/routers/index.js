@@ -3,9 +3,10 @@ import { Route, Switch } from 'react-router-dom';
 import ClientProducs from '../Pages/Products';
 import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login';
-import Register from '../Components/Register/Register';
+import Register from '../Pages/Register';
 import PrivateRoute from './PrivateRoute';
 import Profile from '../Pages/Profile';
+import Checkout from '../Pages/Checkout';
 
 const Routers = () => (
   <Switch>
@@ -15,7 +16,7 @@ const Routers = () => (
     <PrivateRoute exact path="/admin/orders" component={ () => <div>Funcionando</div> } />
     <PrivateRoute exact path="/products" component={ ClientProducs } />
     <PrivateRoute exact path="/profile" component={ Profile } />
-    <Route exact path="/checkout" component={ () => <div>Cliente - Checkout</div> } />
+    <Route exact path="/checkout" component={ Checkout } />
   </Switch>
 );
 

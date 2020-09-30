@@ -1,26 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import decode from 'jwt-decode';
 import api from '../../Services/api';
 import { ContextAplication } from '../../Context';
 
+const maxNameSize = 12;
+
 const Form = () => {
   const { name, setName } = useContext(ContextAplication);
-  console.log('funcionando');
+  const [message, setmessage] = useState();
   const submitForm = async (e) => {
     e.preventDefault();
     if (name.length < maxNameSize) return false;
     try {
       const token = localStorage.getItem('token');
-      await api.post('/profile', { token, name });
+      const updateProf = await api.post('/profile', { token, name });
+      setmessage(updateProf.data.message);
       setName('');
+    return updateProf.data.message;
     } catch (error) {
       return error;
     }
   };
 
   const updateName = (newName) => setName(newName);
-
-  const maxNameSize = 12;
 
   const getEmail = () => {
     const token = JSON.parse(localStorage.getItem('token'));
@@ -37,6 +39,7 @@ const Form = () => {
             readOnly
             name="email"
             id="email"
+            data-testid="profile-email-input"
             value={ getEmail() }
           />
         </label>
@@ -47,12 +50,20 @@ const Form = () => {
             type="text"
             name="name"
             id="name"
+            data-testid="profile-name-input"
             value={ name }
             onChange={ (e) => updateName(e.target.value) }
           />
         </label>
-        <button disabled={ name.length < maxNameSize } type="submit">Salvar</button>
+        <button
+          data-testid="profile-save-btn"
+          disabled={ name.length < maxNameSize }
+          type="submit"
+        >
+          Salvar
+        </button>
       </form>
+      { message && message }
     </div>
   );
 };

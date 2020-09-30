@@ -29,7 +29,6 @@ const ClientProducs = () => {
   useEffect(() => {
     const JWT = JwtDecode();
     if (JWT.role === 'administrator') return history.push('/admin/orders');
-    return null;
   }, [history]);
 
   return (

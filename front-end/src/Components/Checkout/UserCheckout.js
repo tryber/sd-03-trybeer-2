@@ -1,15 +1,22 @@
 import React, { useContext } from 'react';
 import { ContextAplication } from '../../Context';
-
-
+import { randomNumber } from '../../Services';
 
 const renderItens = (cart) => (
-  cart.map(({ name, price, qtd }) =>
-<li>{name}  R$ {price}</li>)
+  cart.map(({ name, price }) => (
+    <div key={ randomNumber() }>
+      <li>
+        {name}
+        {' '}
+        R$
+        {' '}
+        {price}
+      </li>
+    </div>
+  ))
 );
 
 const UserCheckout = () => {
-
   const { cart } = useContext(ContextAplication);
 
   return (

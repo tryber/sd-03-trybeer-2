@@ -6,6 +6,7 @@ import ButtonMinus from './ButtonMinus';
 import ButtonPlus from './ButtonPlus';
 import ButtonViewCart from './ButtonViewCart';
 import api from '../../Services/api';
+import { randomNumber } from '../../Services';
 
 const tofixed = 2;
 const quantityCartProduct = (e, cart) => cart.filter(({ name }) => name === e)
@@ -13,7 +14,7 @@ const quantityCartProduct = (e, cart) => cart.filter(({ name }) => name === e)
 
 const createCardsMenuOptions = (products, cart) => (
   products.map(({ name, price, urlImage }, idx) => (
-    <div key={ `${idx}` }>
+    <div key={ randomNumber() }>
       <p
         data-testid={ `${idx}-product-price` }
       >
@@ -36,6 +37,7 @@ const ClientProducs = () => {
     const JWT = JwtDecode();
     if (JWT.role === 'administrator') return history.push('/admin/orders');
     api.get('/products').then(({ data }) => setShowProducts(data));
+    return true;
   }, [history, setShowProducts]);
 
   return (

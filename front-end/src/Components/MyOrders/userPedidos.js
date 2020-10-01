@@ -1,13 +1,10 @@
 import React from 'react';
-import TopMenu from '../../Components/Header/TopMenu';
+import TopMenu from '../Header/TopMenu';
 
-const UserOrders = () => {
-
-  return (
-    <div>
-        <TopMenu param='Meus pedidos' />
-    </div>
-  );
-};
+const UserOrders = () => (
+  <div>
+    <TopMenu param="Meus pedidos" />
+  </div>
+);
 
 export default UserOrders;

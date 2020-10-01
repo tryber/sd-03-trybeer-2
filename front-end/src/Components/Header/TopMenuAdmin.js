@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import menu from '../../assets/Menu/Menu.png';
 import LogoutButton from './LogoutButton';
-import AdminProfileButtton from '../Header/AdminProfileButton';
-import AdminResquestButton from '../Header/AdminRequestBurron';
+import AdminProfileButtton from './AdminProfileButton';
+import AdminResquestButton from './AdminRequestBurron';
 
 const TopMenuAdmin = ({ param }) => {
   const [divDisabled, setDivDisabled] = useState(false);
@@ -13,12 +14,12 @@ const TopMenuAdmin = ({ param }) => {
         <button
           type="button"
           data-testid="top-hamburguer"
-          onClick={() => setDivDisabled(!divDisabled)}
+          onClick={ () => setDivDisabled(!divDisabled) }
         >
-          <img src={menu} alt="Menu Superior" width="50px" />
+          <img src={ menu } alt="Menu Superior" width="50px" />
         </button>
         <div
-          class="admin-side-bar-container"
+          className="admin-side-bar-container"
         >
           <AdminResquestButton />
           <AdminProfileButtton />
@@ -28,6 +29,10 @@ const TopMenuAdmin = ({ param }) => {
       <h1 data-testid="top-title">{param}</h1>
     </div>
   );
+};
+
+TopMenuAdmin.propTypes = {
+  param: PropTypes.string.isRequired,
 };
 
 export default TopMenuAdmin;

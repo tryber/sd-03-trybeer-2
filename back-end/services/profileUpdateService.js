@@ -5,7 +5,7 @@ const profileUpdateService = async (newName, profileToken) => {
   const { email } = decode(profileToken);
   try {
     await updateUser(email, newName);
-    return true;
+    return { message: 'Atualização concluída com sucesso' };
   } catch (error) {
     return false;
   }

@@ -1,6 +1,8 @@
 require('dotenv/config');
 const mysqlx = require('@mysql/xdevapi');
+
 let schema;
+
 const connection = () =>
   schema
     ? Promise.resolve(schema)
@@ -20,4 +22,5 @@ const connection = () =>
           console.error(err);
           process.exit(1);
         });
+
 module.exports = connection;

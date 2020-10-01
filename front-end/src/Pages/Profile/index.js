@@ -3,7 +3,7 @@ import Form from '../../Components/Profile/Form';
 
 const Profile = () => (
   <div>
-    <h1>Cliente - Meu Perfil</h1>
+    <h1 data-testid="top-title">Cliente - Meu perfil</h1>
     <Form />
   </div>
 );

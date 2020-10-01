@@ -5,7 +5,7 @@ const profileController = async (req, res) => {
     const profileToken = req.body.token;
     const newName = req.body.name;
     const updateProfile = await profileUpdateService(newName, profileToken);
-    if (updateProfile) return res.sendStatus(200);
+    if (updateProfile) return res.status(200).json(updateProfile);
   } catch (error) {
     return res.sendStatus(400);
   }

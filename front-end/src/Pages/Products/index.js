@@ -4,7 +4,7 @@ import ClientProducs from '../../Components/Products/ClientProducs';
 
 const Products = () => (
   <div>
-    <TopMenu />
+    <TopMenu param='TryBeer' />
     <ClientProducs />
   </div>
 );

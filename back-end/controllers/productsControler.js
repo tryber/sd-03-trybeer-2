@@ -7,6 +7,6 @@ const productsControler = async (req, res) => {
   } catch (err) {
     return err;
   }
-}
+};
 
 module.exports = productsControler;

@@ -7,3 +7,4 @@ export const logout = () => localStorage.removeItem(TOKEN_KEY);
 export const removeCart = () => localStorage.removeItem(CART);
 export const updateCart = (cart) => localStorage.setItem(CART, JSON.stringify(cart));
 export const getCart = () => JSON.parse(localStorage.getItem(CART));
+export const randomNumber = () => Math.random();

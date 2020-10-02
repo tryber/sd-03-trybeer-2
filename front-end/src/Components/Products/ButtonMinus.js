@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { ContextAplication } from '../../Context';
 
-const limitMin = 0;
+const zero = 0;
 
 const handleChange = (name, cart, setCart) => {
-  if (cart.length === limitMin) return;
+  if (cart.length === zero) return;
 
   cart.forEach((product, i) => {
-    if (product.name === name && i >= limitMin) {
+    if (product.name === name && i >= zero) {
       const newCart = cart.filter((_p, idx) => i !== idx);
       setCart(newCart);
     }

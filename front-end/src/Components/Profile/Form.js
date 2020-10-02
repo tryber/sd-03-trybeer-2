@@ -1,35 +1,35 @@
-import React, { useContext } from 'react';
-import decode from 'jwt-decode';
+import React, { useContext, useState } from 'react';
 import api from '../../Services/api';
 import { ContextAplication } from '../../Context';
+import { getToken } from '../../Services';
+import JwtDecode from '../../Services/JwtDecode';
 
 const maxNameSize = 12;
 
 const Form = () => {
   const { name, setName } = useContext(ContextAplication);
+  const [responseUpdate, setResponseUpdate] = useState();
+
   const submitForm = async (e) => {
     e.preventDefault();
-    if (name.length < maxNameSize) return false;
-    try {
-      const token = localStorage.getItem('token');
-      await api.post('/profile', { token, name });
-      setName('');
-    } catch (error) {
-      return error;
-    }
-    return false;
+    if (name.length < maxNameSize) return;
+
+    const token = getToken('token');
+    const updateProf = await api.post('/profile', { token, name });
+    const { message } = await updateProf.data;
+    setResponseUpdate(message);
+    setName('');
   };
 
   const updateName = (newName) => setName(newName);
 
   const getEmail = () => {
-    const token = JSON.parse(localStorage.getItem('token'));
-    return decode(token).email;
+    const JWT = JwtDecode();
+    return JWT.email;
   };
 
   return (
     <div>
-      <p />
       <form onSubmit={ submitForm }>
         <label htmlFor="Email">
           Email
@@ -38,6 +38,7 @@ const Form = () => {
             readOnly
             name="email"
             id="email"
+            data-testid="profile-email-input"
             value={ getEmail() }
           />
         </label>
@@ -48,14 +49,20 @@ const Form = () => {
             type="text"
             name="name"
             id="name"
+            data-testid="profile-name-input"
             value={ name }
             onChange={ (e) => updateName(e.target.value) }
           />
         </label>
-        <button disabled={ name.length < maxNameSize } type="submit">
+        <button
+          data-testid="profile-save-btn"
+          disabled={ name.length < maxNameSize }
+          type="submit"
+        >
           Salvar
         </button>
       </form>
+      { responseUpdate && responseUpdate }
     </div>
   );
 };

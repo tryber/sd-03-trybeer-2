@@ -5,6 +5,9 @@ import { getCart } from '../Services';
 export const ContextAplication = createContext();
 
 const infoUser = { email: '', password: '' };
+
+const addressUser = { street: '', number: '' };
+
 const dateUser = {
   name: '',
   email: '',
@@ -22,6 +25,8 @@ const AplicationProvider = ({ children }) => {
   const [registerUser, setregisterUser] = useState(dateUser);
   const [showProducts, setShowProducts] = useState();
   const [cart, setCart] = useState(getCart('cart') || []);
+  const [address, setAddress] = useState(addressUser);
+  const [finish, setFinish] = useState(false);
 
   const context = {
     registerUser,
@@ -42,6 +47,10 @@ const AplicationProvider = ({ children }) => {
     setShowProducts,
     cart,
     setCart,
+    address,
+    setAddress,
+    finish,
+    setFinish,
   };
 
   return (

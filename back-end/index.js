@@ -1,16 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const loginController = require('./controllers/loginController');
 const registerController = require('./controllers/registerController');
 const profileController = require('./controllers/profileController');
 const checkoutController = require('./controllers/checkoutController');
+const productsControler = require('./controllers/productsControler');
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use('/images', express.static(path.join(__dirname, '/images')));
+app.get('/products', productsControler);
+
 app.post('/login', loginController);
 app.post('/register', registerController);
 app.post('/profile', profileController);

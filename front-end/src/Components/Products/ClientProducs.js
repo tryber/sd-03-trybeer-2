@@ -8,7 +8,7 @@ import ButtonViewCart from './ButtonViewCart';
 import api from '../../Services/api';
 import { randomNumber } from '../../Services';
 
-const tofixed = 2;
+const two = 2;
 const quantityCartProduct = (e, cart) => cart.filter(({ name }) => name === e)
   .map(({ name }) => name).length;
 
@@ -18,7 +18,7 @@ const createCardsMenuOptions = (products, cart) => (
       <p
         data-testid={ `${idx}-product-price` }
       >
-        { `R$ ${price.toFixed(tofixed).toString().replace('.', ',')}` }
+        { `R$ ${price.toFixed(two).toString().replace('.', ',')}` }
       </p>
       <img src={ urlImage } alt="Imagen do produto" data-testid={ `${idx}-product-img` } width="50px" />
       <h3 data-testid={ `${idx}-product-name` }>{ name }</h3>
@@ -37,7 +37,6 @@ const ClientProducs = () => {
     const JWT = JwtDecode();
     if (JWT.role === 'administrator') return history.push('/admin/orders');
     api.get('/products').then(({ data }) => setShowProducts(data));
-    return true;
   }, [history, setShowProducts]);
 
   return (

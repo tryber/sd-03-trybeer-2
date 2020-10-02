@@ -9,6 +9,7 @@ import Profile from '../Pages/Profile';
 import Checkout from '../Pages/Checkout';
 import Orders from '../Pages/userOrders'
 import Admin from '../Pages/Admin';
+import AdminOrders from '../Pages/AdminsOrders'
 
 const Routers = () => (
   <Switch>
@@ -20,6 +21,7 @@ const Routers = () => (
     <PrivateRoute exact path="/profile" component={ Profile } />
     <PrivateRoute exact path="/checkout" component={ Checkout } />
     <PrivateRoute exact path="/admin/profile" component={ Admin } />
+    <PrivateRoute exact path="/admin/orders" component = { AdminOrders} />
   </Switch>
 );
 

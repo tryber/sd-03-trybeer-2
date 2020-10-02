@@ -2,8 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../../Context';
 
-const initialPrice = 0;
-const toFixed = 2;
+const zero = 0;
+const two = 2;
 
 const ButtonViewCart = () => {
   const { cart } = useContext(ContextAplication);
@@ -11,13 +11,13 @@ const ButtonViewCart = () => {
   const history = useHistory();
 
   const totalValue = () => {
-    const total = cart.reduce((acc, e) => Number(acc + e.price), initialPrice);
+    const total = cart.reduce((acc, e) => Number(acc + e.price), zero);
     return total;
   };
 
   useEffect(() => {
-    if (cart.length > initialPrice) setIsDisabled(false);
-    if (cart.length === initialPrice) setIsDisabled(true);
+    if (cart.length > zero) setIsDisabled(false);
+    if (cart.length === zero) setIsDisabled(true);
   }, [cart, setIsDisabled, isDisabled]);
 
   return (
@@ -33,7 +33,7 @@ const ButtonViewCart = () => {
       <p
         data-testid="checkout-bottom-btn-value"
       >
-        { `R$ ${totalValue().toFixed(toFixed).toString().replace('.', ',')}` }
+        { `R$ ${totalValue().toFixed(two).toString().replace('.', ',')}` }
       </p>
     </div>
   );

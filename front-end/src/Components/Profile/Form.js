@@ -1,32 +1,31 @@
-import React, { useContext,useState } from 'react';
-import decode from 'jwt-decode';
+import React, { useContext, useState } from 'react';
 import api from '../../Services/api';
 import { ContextAplication } from '../../Context';
+import { getToken } from '../../Services';
+import JwtDecode from '../../Services/JwtDecode';
 
 const maxNameSize = 12;
 
 const Form = () => {
   const { name, setName } = useContext(ContextAplication);
-  const [message, setmessage] = useState();
+  const [responseUpdate, setResponseUpdate] = useState();
+
   const submitForm = async (e) => {
     e.preventDefault();
-    if (name.length < maxNameSize) return false;
-    try {
-      const token = localStorage.getItem('token');
-      const updateProf = await api.post('/profile', { token, name });
-      setmessage(updateProf.data.message);
-      setName('');
-    return updateProf.data.message;
-    } catch (error) {
-      return error;
-    }
+    if (name.length < maxNameSize) return;
+
+    const token = getToken('token');
+    const updateProf = await api.post('/profile', { token, name });
+    const { message } = await updateProf.data;
+    setResponseUpdate(message);
+    setName('');
   };
 
   const updateName = (newName) => setName(newName);
 
   const getEmail = () => {
-    const token = JSON.parse(localStorage.getItem('token'));
-    return decode(token).email;
+    const JWT = JwtDecode();
+    return JWT.email;
   };
 
   return (
@@ -63,7 +62,7 @@ const Form = () => {
           Salvar
         </button>
       </form>
-      { message && message }
+      { responseUpdate && responseUpdate }
     </div>
   );
 };

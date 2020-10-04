@@ -8,6 +8,7 @@ const registerController = require('./controllers/registerController');
 const profileController = require('./controllers/profileController');
 const checkoutController = require('./controllers/checkoutController');
 const productsControler = require('./controllers/productsControler');
+const ordersController = require('./controllers/ordersController');
 
 const app = express();
 app.use(cors());
@@ -21,6 +22,7 @@ app.post('/login', loginController);
 app.post('/register', registerController);
 app.post('/profile', profileController);
 app.post('/checkout', checkoutController);
+app.post('/orders', ordersController);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Running on :${PORT}`));

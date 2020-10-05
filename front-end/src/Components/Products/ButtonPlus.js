@@ -7,7 +7,7 @@ const countItem = (e, cart) => cart.filter(({ name }) => name === e)
   .map(({ name }) => name).length;
 
 const handleChange = (name, price, cart, setCart) => {
-  setCart([...cart, { name, price, ['qnt']: countItem(name, cart) + 1 }]);
+  setCart([...cart, { name, price, qnt: countItem(name, cart) + 1 }]);
 };
 
 const ButtonPlus = ({ idx }) => {

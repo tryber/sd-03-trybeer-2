@@ -2,9 +2,9 @@ const profileUpdateService = require('../services/profileUpdateService');
 
 const profileController = async (req, res) => {
   try {
-    const profileToken = req.body.token;
+    const { token } = req;
     const newName = req.body.name;
-    const updateProfile = await profileUpdateService(newName, profileToken);
+    const updateProfile = await profileUpdateService(newName, token);
     if (updateProfile) return res.status(200).json(updateProfile);
   } catch (error) {
     return res.sendStatus(400);

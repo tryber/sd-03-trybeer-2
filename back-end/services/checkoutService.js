@@ -3,17 +3,17 @@ const { registerSale, registerProducts } = require('../models/checkoutModel');
 
 const checkoutService = async ({
   user_id,
-  price,
   address,
-  number,
-  status,
-  products,
+  cart,
+  price,
+  status = 'Pendente',
 }) => {
   const dateNow = moment().format('YYYY-MM-DD H:mm:ss');
+  const { street, number } = address;
   const dadosVenda = {
     user_id,
     total_price: price,
-    delivery_address: address,
+    delivery_address: street,
     delivery_number: number,
     sale_date: dateNow,
     status,
@@ -30,14 +30,12 @@ const checkoutService = async ({
   }
   try {
     const productsObject = JSON.parse(products);
-    console.log('Antes', productsObject);
     const registrarVenda = await registerSale(dadosVenda);
     productsObject.map((product) => {
       const novoProduto = product;
       novoProduto.sale_id = registrarVenda;
       return productsObject;
     });
-    console.log('Depois', productsObject);
     productsObject.forEach((product) => registerProducts(product));
   } catch (error) {
     return error;

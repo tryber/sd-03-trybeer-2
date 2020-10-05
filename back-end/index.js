@@ -8,7 +8,8 @@ const registerController = require('./controllers/registerController');
 const profileController = require('./controllers/profileController');
 const checkoutController = require('./controllers/checkoutController');
 const productsControler = require('./controllers/productsControler');
-const ordersController = require('./controllers/ordersController');
+const ordersRoutes = require('./routes/ordersRoutes');
+const verifyToken = require('./services/verifyToken');
 
 const app = express();
 app.use(cors());
@@ -20,9 +21,9 @@ app.get('/products', productsControler);
 
 app.post('/login', loginController);
 app.post('/register', registerController);
-app.post('/profile', profileController);
-app.post('/checkout', checkoutController);
-app.post('/orders', ordersController);
+app.post('/profile', verifyToken, profileController);
+app.post('/checkout', verifyToken, checkoutController);
+app.use('/orders', verifyToken, ordersRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Running on :${PORT}`));

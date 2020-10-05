@@ -3,11 +3,11 @@ const connection = require('./connection');
 const getInfo = async (e) => connection()
   .then((db) => db
     .getTable('users')
-    .select(['name', 'email', 'password', 'role'])
+    .select(['id', 'name', 'email', 'role'])
     .execute())
   .then((results) => results.fetchAll())
-  .then((data) => data.filter(([name, email, password, role]) => (e === email
-    ? { name, email, password, role } : false)));
+  .then((data) => data.filter(([id, name, email, role]) => (e === email
+    ? { id, name, email, role } : false)));
 
 const verifyIfExists = async (email) => connection()
   .then((db) => db

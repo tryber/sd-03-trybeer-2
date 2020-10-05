@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import api from '../../Services/api';
 import { ContextAplication } from '../../Context';
-import { getToken } from '../../Services';
 import JwtDecode from '../../Services/JwtDecode';
 
 const maxNameSize = 12;
@@ -11,14 +10,20 @@ const Form = () => {
   const [responseUpdate, setResponseUpdate] = useState();
 
   const submitForm = async (e) => {
+    const messageTime = 3000;
     e.preventDefault();
     if (name.length < maxNameSize) return;
-
-    const token = getToken('token');
-    const updateProf = await api.post('/profile', { token, name });
-    const { message } = await updateProf.data;
-    setResponseUpdate(message);
-    setName('');
+    try {
+      const updateProf = await api.post('/profile', { name });
+      const { message } = await updateProf.data;
+      setResponseUpdate(message);
+      setName('');
+      setTimeout(() => {
+        setResponseUpdate('');
+      }, messageTime);
+    } catch (error) {
+      return error;
+    }
   };
 
   const updateName = (newName) => setName(newName);
@@ -62,7 +67,7 @@ const Form = () => {
           Salvar
         </button>
       </form>
-      { responseUpdate && responseUpdate }
+      {responseUpdate && responseUpdate}
     </div>
   );
 };

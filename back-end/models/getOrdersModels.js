@@ -4,6 +4,7 @@ const connection = require('./connection');
 // complaining about varibles with no cameCase
 const saleDate = 'sale_date';
 const totalPrice = 'total_price';
+
 const getAllById = async (userId) => connection()
   .then((db) => db
     .getTable('sales')
@@ -18,4 +19,19 @@ const getAllById = async (userId) => connection()
     total_price,
   })));
 
-module.exports = { getAllById };
+const getByOrderId = async (orderId, userId) => connection()
+  .then((db) => db
+    .getTable('sales')
+    .select('id', saleDate, totalPrice)
+    .bind('orderId', orderId)
+    .bind('userId', userId)
+    .where('id = :orderId AND user_id = :userId')
+    .execute())
+  .then((response) => response.fetchAll())
+  .then((result) => result.filter(([id, sale_date = 'saleDate', total_price = 'totalPrice']) => ({
+    id,
+    sale_date,
+    total_price,
+  })));
+
+module.exports = { getAllById, getByOrderId };

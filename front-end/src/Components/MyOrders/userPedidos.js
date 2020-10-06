@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import TopMenu from '../Header/TopMenu';
+import api from '../../Services/api';
+import { ContextAplication } from '../../Context';
+import CardOrders from './CardOrders';
 
-const UserOrders = () => (
-  <div>
-    <TopMenu param="Meus pedidos" />
-  </div>
-);
+const UserOrders = () => {
+  const { setOrdersUser, ordersUser } = useContext(ContextAplication)
+
+  useEffect(() => {
+    api.get('/orders').then(({ data }) => setOrdersUser(data))
+  }, [setOrdersUser, ordersUser]);
+
+  return (
+    <div>
+      <TopMenu param="Meus pedidos" />
+      { ordersUser && <CardOrders ordersUser={ ordersUser } /> }
+    </div>
+  )
+};
 
 export default UserOrders;

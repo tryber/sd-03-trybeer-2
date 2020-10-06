@@ -9,8 +9,9 @@ import api from '../../Services/api';
 import { randomNumber } from '../../Services';
 
 const two = 2;
+const zero = 0;
 const quantityCartProduct = (e, cart) => cart.filter(({ name }) => name === e)
-  .map(({ name }) => name).length;
+  .map(({ qnt }) => qnt);
 
 const createCardsMenuOptions = (products, cart) => (
   products.map(({ name, price, urlImage }, idx) => (
@@ -22,9 +23,15 @@ const createCardsMenuOptions = (products, cart) => (
       </p>
       <img src={ urlImage } alt="Imagen do produto" data-testid={ `${idx}-product-img` } width="50px" />
       <h3 data-testid={ `${idx}-product-name` }>{ name }</h3>
-      <ButtonPlus idx={ idx } name={ name } />
-      <ButtonMinus idx={ idx } name={ name } />
-      <p data-testid={ `${idx}-product-qtd` }>{ quantityCartProduct(name, cart) }</p>
+      <ButtonPlus idx={ idx } />
+      <ButtonMinus idx={ idx } />
+      <p data-testid={ `${idx}-product-qtd` }>
+        {
+        quantityCartProduct(name, cart) <= zero
+          ? zero
+          : quantityCartProduct(name, cart)
+      }
+      </p>
     </div>
   ))
 );

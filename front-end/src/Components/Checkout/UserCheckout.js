@@ -6,39 +6,35 @@ import api from '../../Services/api';
 
 const zero = 0;
 const two = 2;
+const time = 4000;
 
 const handleChangeInput = (name, event, input, setAddress) => {
   setAddress({ ...input, [name]: event });
 };
 
 const totalPrice = (cart) => {
-  const total = cart.reduce((acc, e) => Number(acc + e.price), zero);
+  const total = cart.reduce((acc, { price, qnt }) => Number(acc + (price * qnt)), zero);
   return total;
 };
 
-const countItem = (e, cart) => cart.filter(({ name }) => name === e)
-  .map(({ name }) => name).length;
-
 const renderList = (cart) => (
-  cart.reduce((unico, item) => (unico.includes(item.name)
-    ? unico
-    : [...unico, item]), [])
-    .map(({ name, price }, idx) => (
-      <div key={ randomNumber() }>
-        <p data-testid={ `${idx}-product-qtd-input` }>{ countItem(name, cart) }</p>
-        <li>
-          <p data-testid={ `${idx}-product-name` }>{name}</p>
-          <p data-testid={ `${idx}-product-unit-price` }>{`(R$ ${price.toFixed(two).toString().replace('.', ',')} un)`}</p>
-          <h2 data-testid={ `${idx}-product-total-value` }>{`R$ ${totalPrice(cart).toFixed(two).toString().replace('.', ',')}`}</h2>
-        </li>
-        <button
-          data-testid={ `${idx}-removal-button` }
-          onClick={ () => removeCart() }
-        >
-          -
-        </button>
-      </div>
-    ))
+  cart.map(({ name, price, qnt }, idx) => (
+    <div key={ randomNumber() }>
+      <p data-testid={ `${idx}-product-qtd-input` }>{qnt}</p>
+      <li>
+        <p data-testid={ `${idx}-product-name` }>{name}</p>
+        <p data-testid={ `${idx}-product-unit-price` }>{`(R$ ${price.toFixed(two).toString().replace('.', ',')} un)`}</p>
+        <h2 data-testid={ `${idx}-product-total-value` }>{`R$ ${totalPrice(cart).toFixed(two).toString().replace('.', ',')}`}</h2>
+      </li>
+      <button
+        type="submit"
+        data-testid={ `${idx}-removal-button` }
+        onClick={ () => removeCart() }
+      >
+        -
+      </button>
+    </div>
+  ))
 );
 
 const UserCheckout = () => {
@@ -50,11 +46,13 @@ const UserCheckout = () => {
   const history = useHistory();
 
   const finishSale = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    const total = totalPrice(cart).toFixed(two).toString().replace('.', ',');
     setFinish(true);
-    // const list = { address, cart, }
-    await api.post('/checkout', { address, cart, qnt: totalPrice(cart) });
-    return setTimeout(() => history.push('/products'), 2000);
+    await api.post('/checkout', {
+      address, cart, total, status: 'Pendente',
+    });
+    return setTimeout(() => history.push('/products'), time);
   };
 
   useEffect(() => {
@@ -65,7 +63,7 @@ const UserCheckout = () => {
     ) setIsDisabled(false);
 
     if (cart.length === zero) setIsDisabled(true);
-  }, [cart, address, finish, setIsDisabled, isDisabled]);
+  }, [cart, address, finish, setIsDisabled, isDisabled, street, number]);
 
   return (
     <div>

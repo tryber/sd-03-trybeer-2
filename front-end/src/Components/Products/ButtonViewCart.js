@@ -11,8 +11,8 @@ const ButtonViewCart = () => {
   const history = useHistory();
 
   const totalValue = () => {
-    const total = cart.reduce((acc, e) => Number(acc + e.price), zero);
-    return total;
+    const total = cart.reduce((acc, { price, qnt }) => Number(acc + (price * qnt)), zero);
+    return total.toFixed(two).toString().replace('.', ',');
   };
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const ButtonViewCart = () => {
       <p
         data-testid="checkout-bottom-btn-value"
       >
-        { `R$ ${totalValue().toFixed(two).toString().replace('.', ',')}` }
+        { `R$ ${totalValue()}` }
       </p>
     </div>
   );

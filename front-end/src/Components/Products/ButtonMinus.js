@@ -4,26 +4,28 @@ import { ContextAplication } from '../../Context';
 
 const zero = 0;
 
-const handleChange = (name, cart, setCart) => {
-  if (cart.length === zero) return;
+const ButtonMinus = ({ idx }) => {
+  const { setCart, showProducts } = useContext(ContextAplication);
+  const { name } = showProducts[idx];
 
-  cart.forEach((product, i) => {
-    if (product.name === name && i >= zero) {
-      const newCart = cart.filter((_p, idx) => i !== idx);
-      setCart(newCart);
-    }
-  });
-};
-
-const ButtonMinus = ({ idx, name }) => {
-  const { cart, setCart } = useContext(ContextAplication);
+  const handleChange = () => {
+    setCart((state) => {
+      const newState = state.map((ele) => {
+        if (ele.name === name && ele.qnt > zero) {
+          return { ...ele, qnt: ele.qnt - 1 };
+        }
+        return ele;
+      });
+      return newState;
+    });
+  };
 
   return (
     <div>
       <button
         type="button"
         data-testid={ `${idx}-product-minus` }
-        onClick={ () => handleChange(name, cart, setCart) }
+        onClick={ () => handleChange() }
       >
         -
       </button>
@@ -33,7 +35,6 @@ const ButtonMinus = ({ idx, name }) => {
 
 ButtonMinus.propTypes = {
   idx: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
 };
 
 export default ButtonMinus;

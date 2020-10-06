@@ -1,42 +1,31 @@
-const moment = require('moment');
 const { registerSale, registerProducts } = require('../models/checkoutModel');
+const dateNow = require('../utils/dateNow');
 
 const checkoutService = async ({
   user_id,
-  address,
-  cart,
-  price,
+  total_price,
+  delivery_address,
+  delivery_number,
   status = 'Pendente',
+  products,
 }) => {
-  const dateNow = moment().format('YYYY-MM-DD H:mm:ss');
-  const { street, number } = address;
   const dadosVenda = {
     user_id,
-    total_price: price,
-    delivery_address: street,
-    delivery_number: number,
+    total_price: total_price.replace(',', '.'),
+    delivery_address,
+    delivery_number,
     sale_date: dateNow,
     status,
   };
-
-  const verificaUndefined = Object.entries(dadosVenda).some(
-    (product) => product[1] === undefined || product[1] === '',
-  );
-  if (verificaUndefined || !products) {
-    return {
-      message: 'Faltam informações',
-      order: 'user_id, price, address, number, status, products',
-    };
-  }
   try {
-    const productsObject = JSON.parse(products);
+    const productsObject = products;
     const registrarVenda = await registerSale(dadosVenda);
-    productsObject.map((product) => {
+    products.map((product) => {
       const novoProduto = product;
       novoProduto.sale_id = registrarVenda;
+      registerProducts(novoProduto);
       return productsObject;
     });
-    productsObject.forEach((product) => registerProducts(product));
   } catch (error) {
     return error;
   }

@@ -3,27 +3,51 @@ import Proptypes from 'prop-types';
 import { ContextAplication } from '../../Context';
 import { updateCart } from '../../Services';
 
-const countItem = (e, cart) => cart.filter(({ name }) => name === e)
-  .map(({ name }) => name).length;
-
-const handleChange = (name, price, cart, setCart) => {
-  setCart([...cart, { name, price, qnt: countItem(name, cart) + 1 }]);
-};
+const zero = 0;
 
 const ButtonPlus = ({ idx }) => {
   const { showProducts, cart, setCart } = useContext(ContextAplication);
-  const { name, price } = showProducts[idx];
+  const { name, price, id } = showProducts[idx];
+
+  const handleChange = (eleName, elePrice) => {
+    let isChanged = false;
+    setCart((state) => {
+      const newState = state.map((ele) => {
+        if (ele.name === eleName) {
+          isChanged = true;
+          return { ...ele, qnt: ele.qnt + 1 };
+        }
+        return ele;
+      });
+      if (!isChanged) {
+        return [...state, {
+          id, name: eleName, price: elePrice, qnt: 1,
+        }];
+      }
+      return newState;
+    });
+  };
 
   useEffect(() => {
+    cart.map((ele) => {
+      if (ele.qnt === zero) {
+        cart.forEach((product, i) => {
+          if (product.name === ele.name && i >= zero) {
+            const newCart = cart.filter((_p, index) => i !== index);
+            setCart(newCart);
+          }
+        });
+      }
+    });
     updateCart([...cart]);
-  }, [cart]);
+  }, [cart, setCart]);
 
   return (
     <div>
       <button
         type="button"
         data-testid={ `${idx}-product-plus` }
-        onClick={ () => handleChange(name, price, cart, setCart) }
+        onClick={ () => handleChange(name, price) }
       >
         +
       </button>

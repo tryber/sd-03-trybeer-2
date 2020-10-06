@@ -2,21 +2,18 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../../Context';
 import { randomNumber, removeCart } from '../../Services';
+import TopMenu from '../Header/TopMenu';
 import api from '../../Services/api';
-
 const zero = 0;
 const two = 2;
 const time = 4000;
-
 const handleChangeInput = (name, event, input, setAddress) => {
   setAddress({ ...input, [name]: event });
 };
-
 const totalPrice = (cart) => {
   const total = cart.reduce((acc, { price, qnt }) => Number(acc + (price * qnt)), zero);
   return total;
 };
-
 const renderList = (cart) => (
   cart.map(({ name, price, qnt }, idx) => (
     <div key={ randomNumber() }>
@@ -36,7 +33,6 @@ const renderList = (cart) => (
     </div>
   ))
 );
-
 const UserCheckout = () => {
   const {
     cart, address, setAddress, finish, setFinish,
@@ -44,7 +40,6 @@ const UserCheckout = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const { street, number } = address;
   const history = useHistory();
-
   const finishSale = async (e) => {
     e.preventDefault();
     const total = totalPrice(cart).toFixed(two).toString().replace('.', ',');
@@ -54,19 +49,17 @@ const UserCheckout = () => {
     });
     return setTimeout(() => history.push('/products'), time);
   };
-
   useEffect(() => {
     if (
       (cart.length > zero)
       && (street.length > zero)
       && (number.length > zero)
     ) setIsDisabled(false);
-
     if (cart.length === zero) setIsDisabled(true);
   }, [cart, address, finish, setIsDisabled, isDisabled, street, number]);
-
   return (
     <div>
+      <TopMenu />
       <form>
         <h1 data-testid="top-title">Finalizar pedido</h1>
         <h1>Produtos</h1>
@@ -110,5 +103,4 @@ const UserCheckout = () => {
     </div>
   );
 };
-
 export default UserCheckout;

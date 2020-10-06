@@ -3,12 +3,12 @@ import decode from 'jwt-decode';
 import TopMenuAdmin from '../Header/TopMenuAdmin';
 
 const getEmail = () => {
-  const token = JSON.parse(localStorage.getItem('token'));
+  const token = (localStorage.getItem('token'));
   return decode(token).email;
 };
 
 const getName = () => {
-  const token = JSON.parse(localStorage.getItem('token'));
+  const token = (localStorage.getItem('token'));
   return decode(token).name;
 };
 

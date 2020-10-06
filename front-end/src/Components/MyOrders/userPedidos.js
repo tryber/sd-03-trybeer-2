@@ -5,10 +5,10 @@ import { ContextAplication } from '../../Context';
 import CardOrders from './CardOrders';
 
 const UserOrders = () => {
-  const { setOrdersUser, ordersUser } = useContext(ContextAplication)
+  const { setOrdersUser, ordersUser } = useContext(ContextAplication);
 
   useEffect(() => {
-    api.get('/orders').then(({ data }) => setOrdersUser(data))
+    api.get('/orders').then(({ data }) => setOrdersUser(data));
   }, [setOrdersUser, ordersUser]);
 
   return (
@@ -16,7 +16,7 @@ const UserOrders = () => {
       <TopMenu param="Meus pedidos" />
       { ordersUser && <CardOrders ordersUser={ ordersUser } /> }
     </div>
-  )
+  );
 };
 
 export default UserOrders;

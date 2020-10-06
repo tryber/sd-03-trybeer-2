@@ -60,7 +60,7 @@ const AplicationProvider = ({ children }) => {
   };
 
   return (
-    <div>
+    <div className="container-context">
       <ContextAplication.Provider value={ context }>
         {children}
       </ContextAplication.Provider>

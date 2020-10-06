@@ -51,6 +51,8 @@ const FormInput = () => {
             required
           />
         </label>
+        {' '}
+        <br />
         <label htmlFor="password" data-testid="password-input">
           Password
           <input
@@ -61,6 +63,8 @@ const FormInput = () => {
             type="password"
           />
         </label>
+        {' '}
+        <br />
         <ButtonEnter />
       </form>
     </div>

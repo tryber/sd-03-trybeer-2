@@ -33,7 +33,7 @@ const ButtonViewCart = () => {
       <p
         data-testid="checkout-bottom-btn-value"
       >
-        { `R$ ${totalValue()}` }
+        <strong>{ `R$ ${totalValue()}` }</strong>
       </p>
     </div>
   );

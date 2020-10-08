@@ -4,7 +4,6 @@ import { ContextAplication } from '../../Context';
 import { randomNumber, removeCart } from '../../Services';
 import TopMenu from '../Header/TopMenu';
 import api from '../../Services/api';
-
 const zero = 0;
 const two = 2;
 const time = 4000;

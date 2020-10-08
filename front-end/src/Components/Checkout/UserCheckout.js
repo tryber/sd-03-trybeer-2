@@ -67,6 +67,7 @@ const UserCheckout = () => {
 
   return (
     <div>
+    { finish && <h2>Compra realizada com sucesso!</h2> }
       <form>
         <h1 data-testid="top-title"><strong>Finalizar pedido</strong></h1>
         <h1>Produtos</h1>
@@ -112,7 +113,6 @@ const UserCheckout = () => {
           </div>
         </div>
       </form>
-      { finish && <h2>Compra realizada com sucesso!</h2> }
     </div>
   );
 };

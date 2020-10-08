@@ -15,7 +15,7 @@ const quantityCartProduct = (e, cart) => cart.filter(({ name }) => name === e)
 
 const createCardsMenuOptions = (products, cart) => (
   products.map(({ name, price, urlImage }, idx) => (
-    <div key={ randomNumber() }>
+    <div key={ randomNumber() } className="card-products">
       <p
         data-testid={ `${idx}-product-price` }
       >
@@ -23,8 +23,10 @@ const createCardsMenuOptions = (products, cart) => (
       </p>
       <img src={ urlImage } alt="Imagen do produto" data-testid={ `${idx}-product-img` } width="50px" />
       <h3 data-testid={ `${idx}-product-name` }>{ name }</h3>
-      <ButtonPlus idx={ idx } />
-      <ButtonMinus idx={ idx } />
+      <div className="buttons-card">
+        <ButtonPlus idx={ idx } />
+        <ButtonMinus idx={ idx } />
+      </div>
       <p data-testid={ `${idx}-product-qtd` }>
         {
         quantityCartProduct(name, cart) <= zero
@@ -47,7 +49,7 @@ const ClientProducs = () => {
   }, [history, setShowProducts]);
 
   return (
-    <div>
+    <div className="container-cards">
       <h2>Cliente - Produtos</h2>
       { showProducts && createCardsMenuOptions(showProducts, cart)}
       <ButtonViewCart />

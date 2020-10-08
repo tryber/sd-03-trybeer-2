@@ -4,6 +4,7 @@ import { ContextAplication } from '../../Context';
 import { randomNumber, removeCart } from '../../Services';
 import TopMenu from '../Header/TopMenu';
 import api from '../../Services/api';
+
 const zero = 0;
 const two = 2;
 const time = 4000;
@@ -16,7 +17,7 @@ const totalPrice = (cart) => {
 };
 const renderList = (cart) => (
   cart.map(({ name, price, qnt }, idx) => (
-    <div key={ randomNumber() }>
+    <div key={ randomNumber() } className="card-checkout">
       <p data-testid={ `${idx}-product-qtd-input` }>{qnt}</p>
       <li>
         <p data-testid={ `${idx}-product-name` }>{name}</p>
@@ -61,42 +62,48 @@ const UserCheckout = () => {
     <div>
       <TopMenu />
       <form>
-        <h1 data-testid="top-title">Finalizar pedido</h1>
+        <h1 data-testid="top-title"><strong>Finalizar pedido</strong></h1>
         <h1>Produtos</h1>
-        { cart.length
-          ? renderList(cart)
-          : <p>Não há produtos no carrinho</p>}
+        <div className="list-cart">
+          { cart.length
+            ? renderList(cart)
+            : <p>Não há produtos no carrinho</p>}
+        </div>
         <h2
           data-testid="order-total-value"
         >
           {`Total: R$ ${totalPrice(cart).toFixed(two).toString().replace('.', ',')}`}
         </h2>
-        <p>Endereço</p>
-        <label>
-          Rua
-          <input
-            data-testid="checkout-street-input"
-            type="text"
-            onChange={ ({ target }) => handleChangeInput('street', target.value, address, setAddress) }
-          />
-        </label>
-        <label>
-          Número da casa:
-          <input
-            data-testid="checkout-house-number-input"
-            type="text"
-            onChange={ ({ target }) => handleChangeInput('number', target.value, address, setAddress) }
-          />
-        </label>
-        <div>
-          <button
-            disabled={ isDisabled }
-            type="submit"
-            data-testid="checkout-finish-btn"
-            onClick={ (e) => finishSale(e) }
-          >
-            Finalizar Pedido
-          </button>
+        <div className="form-sale">
+          <p>Endereço</p>
+          <label>
+            Rua
+            <br />
+            <input
+              data-testid="checkout-street-input"
+              type="text"
+              onChange={ ({ target }) => handleChangeInput('street', target.value, address, setAddress) }
+            />
+          </label>
+          <label>
+            Número da casa:
+            <br />
+            <input
+              data-testid="checkout-house-number-input"
+              type="text"
+              onChange={ ({ target }) => handleChangeInput('number', target.value, address, setAddress) }
+            />
+          </label>
+          <div>
+            <button
+              disabled={ isDisabled }
+              type="submit"
+              data-testid="checkout-finish-btn"
+              onClick={ (e) => finishSale(e) }
+            >
+              Finalizar Pedido
+            </button>
+          </div>
         </div>
       </form>
       { finish && <h2>Compra realizada com sucesso!</h2> }

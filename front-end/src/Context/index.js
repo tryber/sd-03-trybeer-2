@@ -27,6 +27,8 @@ const AplicationProvider = ({ children }) => {
   const [cart, setCart] = useState(getCart('cart') || []);
   const [address, setAddress] = useState(addressUser);
   const [finish, setFinish] = useState(false);
+  const [ordersUser, setOrdersUser] = useState();
+  const [orderDetails, setOrderDetails] = useState();
 
   const context = {
     registerUser,
@@ -51,10 +53,14 @@ const AplicationProvider = ({ children }) => {
     setAddress,
     finish,
     setFinish,
+    ordersUser,
+    setOrdersUser,
+    setOrderDetails,
+    orderDetails,
   };
 
   return (
-    <div>
+    <div className="container-context">
       <ContextAplication.Provider value={ context }>
         {children}
       </ContextAplication.Provider>

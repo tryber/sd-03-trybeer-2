@@ -7,7 +7,7 @@ const zero = 0;
 
 const ButtonPlus = ({ idx }) => {
   const { showProducts, cart, setCart } = useContext(ContextAplication);
-  const { name, price } = showProducts[idx];
+  const { name, price, id } = showProducts[idx];
 
   const handleChange = (eleName, elePrice) => {
     let isChanged = false;
@@ -19,7 +19,11 @@ const ButtonPlus = ({ idx }) => {
         }
         return ele;
       });
-      if (!isChanged) return [...state, { name: eleName, price: elePrice, qnt: 1 }];
+      if (!isChanged) {
+        return [...state, {
+          id, name: eleName, price: elePrice, qnt: 1,
+        }];
+      }
       return newState;
     });
   };
@@ -33,7 +37,7 @@ const ButtonPlus = ({ idx }) => {
             setCart(newCart);
           }
         });
-      }
+      } return null;
     });
     updateCart([...cart]);
   }, [cart, setCart]);

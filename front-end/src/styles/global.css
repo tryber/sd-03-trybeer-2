@@ -1,0 +1,53 @@
+:root {
+  font-size: 60%;
+  --color-background: #ffff16;
+  --color-primary: #006d9c;
+  --color-primary-light: #fffb0669;
+  --color-primary-card: #ffffff;
+  --color-box-footer: #FAFAFC;
+  --color-fonte-link: #000000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body,
+input,
+button,
+textarea {
+  font:  500 1.6rem Poppins;
+}
+
+a, button {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--color-fonte-link);
+}
+
+a:hover {
+  color: red;
+}
+
+.container-context {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../assets/Menu/beer.jpg');
+}
+
+@media (min-width: 700px) {
+  :root {
+    font-size: 60%;
+  }
+}

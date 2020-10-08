@@ -36,7 +36,7 @@ const Form = () => {
 
   return (
     <div>
-    <TopeMenu />
+      <TopeMenu />
       <form onSubmit={ submitForm }>
         <label htmlFor="Email">
           Email

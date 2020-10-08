@@ -1,0 +1,12 @@
+.container-register {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 65vw;
+  height: 70vh;
+  justify-content: center;
+  animation: login 1s linear;
+  background: var(--color-background);
+  border-radius: 15px;
+}

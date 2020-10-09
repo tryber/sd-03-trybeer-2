@@ -1,6 +1,6 @@
 const connection = require('./connection');
 
-const AdminDetail = () => {
+const AdminDetail = async () => {
   const dbConnect = await connection();
   const getQuery = await dbConnect.getTable('sales')
     .select(['id', 'total_price', 'delivery_address', 'delivery_number', 'sale_date', 'status'])

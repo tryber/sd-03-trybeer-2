@@ -7,11 +7,11 @@ const AdminProfileButton = () => {
   return (
     <div>
       <button
-        type="button"
+        type="submit"
         data-testid="side-menu-item-profile"
         onClick={ () => history.push('/admin/profile') }
       >
-        Meu Perfil
+        Meus Perfil
       </button>
     </div>
   );

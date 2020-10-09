@@ -12,7 +12,7 @@ const getAllById = async (userId) => connection()
     .bind('userId', userId)
     .where('user_id = :userId')
     .execute())
-  .then((response) => response.fetchAll())
+  .then((response) => response.fetchAll() || [])
   .then((result) => result.map(([id, sale_date = 'saleDate', total_price = 'totalPrice']) => ({
     id,
     sale_date,

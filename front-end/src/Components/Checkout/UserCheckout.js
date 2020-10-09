@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../../Context';
 import { randomNumber, removeCart } from '../../Services';
 import api from '../../Services/api';
+import TopMenu from '../Header/TopMenu';
 
 const zero = 0;
 const two = 2;
@@ -67,7 +68,7 @@ const UserCheckout = () => {
 
   return (
     <div>
-    { finish && <h2>Compra realizada com sucesso!</h2> }
+      <TopMenu />
       <form>
         <h1 data-testid="top-title"><strong>Finalizar pedido</strong></h1>
         <h1>Produtos</h1>
@@ -113,6 +114,7 @@ const UserCheckout = () => {
           </div>
         </div>
       </form>
+      { finish && <h2>Compra realizada com sucesso!</h2> }
     </div>
   );
 };

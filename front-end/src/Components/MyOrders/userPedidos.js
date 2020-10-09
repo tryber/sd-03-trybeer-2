@@ -8,7 +8,7 @@ const UserOrders = () => {
   const { setOrdersUser, ordersUser } = useContext(ContextAplication);
 
   useEffect(() => {
-    api.get('/orders').then(({ data }) => setOrdersUser(data));
+    api.get('/orders').then((data) => console.log(data));
   }, [setOrdersUser, ordersUser]);
 
   return (

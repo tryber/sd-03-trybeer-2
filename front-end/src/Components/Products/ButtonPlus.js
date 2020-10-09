@@ -37,7 +37,7 @@ const ButtonPlus = ({ idx }) => {
             setCart(newCart);
           }
         });
-      }
+      } return null;
     });
     updateCart([...cart]);
   }, [cart, setCart]);

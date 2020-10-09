@@ -1,6 +1,7 @@
 const { getAll, getOne } = require('../services/ordersService');
 
 const getByUserId = async (req, res) => {
+  console.log(req.user.id)
   try {
     const userId = req.user.id;
     const getOrders = await getAll(userId);
@@ -12,6 +13,7 @@ const getByUserId = async (req, res) => {
 };
 
 const getByOrderId = async (req, res) => {
+  console.log(req.params)
   try {
     const { orderId } = req.params;
     const { id: userId } = req.user;

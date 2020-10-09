@@ -1,9 +1,9 @@
 import React from 'react';
-import UserAdmin from '../../Components/Admin/UserAdmin';
+import AdminPerfil from '../../Components/Admin/UserAdmin';
 
 const UserAdminPerfil = () => (
   <div>
-    <UserAdmin />
+    <AdminPerfil />
   </div>
 );
 

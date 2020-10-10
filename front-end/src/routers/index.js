@@ -8,8 +8,10 @@ import PrivateRoute from './PrivateRoute';
 import Profile from '../Pages/Profile';
 import Checkout from '../Pages/Checkout';
 import Orders from '../Pages/userOrders';
-import Admin from '../Pages/Admin';
+import AdminProfile from '../Pages/Admin';
+/* import AdminOrders from '../Pages/AdminsOrders'; */
 import DetailsOrders from '../Pages/userOrders/userDetailsOrders';
+import DetailsOrdersAdmin from '../Pages/AdminOrderDetails';
 
 const Routers = () => (
   <Switch>
@@ -21,7 +23,8 @@ const Routers = () => (
     <PrivateRoute exact path="/products" component={ ClientProducs } />
     <PrivateRoute exact path="/profile" component={ Profile } />
     <PrivateRoute exact path="/checkout" component={ Checkout } />
-    <PrivateRoute exact path="/admin/profile" component={ Admin } />
+    <PrivateRoute exact path="/admin/profile" component={ AdminProfile } />
+    <PrivateRoute exact path="/admin/orders" component={ DetailsOrdersAdmin } />
   </Switch>
 );
 

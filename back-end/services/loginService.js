@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { verifyIfExists, getInfo, verfiyPassword } = require('../models/users');
+const { SECRET } = require('../utils/SECRET');
 
 const loginService = async (userEmail, userPassword) => {
   const verifyEmail = await verifyIfExists(userEmail);
@@ -8,7 +9,7 @@ const loginService = async (userEmail, userPassword) => {
     const userData = await getInfo(userEmail);
     const [id, name, email, role] = userData[0];
     const userObject = { id, name, email, role };
-    const token = jwt.sign(userObject, process.env.SECRET, {
+    const token = jwt.sign(userObject, SECRET, {
       expiresIn: '30m',
       algorithm: 'HS256',
     });

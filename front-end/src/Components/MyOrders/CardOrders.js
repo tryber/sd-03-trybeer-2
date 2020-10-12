@@ -7,7 +7,7 @@ const CardOrders = ({ ordersUser }) => (
     <div key={ randomNumber() }>
       <Link to="/orders/:id">
         <div data-testid={ `${idx}-order-card-container` }>
-          <p data-testid={ `${idx}-order-number` }>{`Predido ${id}`}</p>
+          <p data-testid={ `${idx}-order-number` }>{`Pedido ${id}`}</p>
           <p data-testid={ `${idx}-order-date` }>{date}</p>
           <p data-testid={ `${idx}-order-total-value` }>{`R$ ${total}`}</p>
         </div>

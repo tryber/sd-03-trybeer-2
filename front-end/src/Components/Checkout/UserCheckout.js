@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../../Context';
 import { randomNumber, removeCart } from '../../Services';
-import TopMenu from '../Header/TopMenu';
 import api from '../../Services/api';
 const zero = 0;
 const two = 2;
@@ -35,7 +34,7 @@ const renderList = (cart) => (
 );
 const UserCheckout = () => {
   const {
-    cart, address, setAddress, finish, setFinish,
+    cart, address, setAddress, finish, setFinish, setSucess,
   } = useContext(ContextAplication);
   const [isDisabled, setIsDisabled] = useState(true);
   const { street, number } = address;
@@ -47,6 +46,7 @@ const UserCheckout = () => {
     await api.post('/checkout', {
       address, cart, total, status: 'Pendente',
     });
+    setSucess('Compra realizada com sucesso!');
     return setTimeout(() => history.push('/products'), time);
   };
   useEffect(() => {
@@ -59,7 +59,7 @@ const UserCheckout = () => {
   }, [cart, address, finish, setIsDisabled, isDisabled, street, number]);
   return (
     <div>
-    { finish && <h2>Compra realizada com sucesso!</h2> }
+    { finish }
       <form>
         <h1 data-testid="top-title"><strong>Finalizar pedido</strong></h1>
         <h1>Produtos</h1>

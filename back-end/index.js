@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/images', express.static(path.join(__dirname, '/images')));
 app.get('/products', productsControler);
-app.get('/admin/orders',verifyToken, AdminDetail.controllerDetailsOrder);
+app.get('/admin/orders', AdminDetail.controllerDetailsOrder);
 
 app.post('/login', loginController);
 app.post('/register', registerController);

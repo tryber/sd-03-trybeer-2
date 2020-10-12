@@ -39,7 +39,7 @@ const createCardsMenuOptions = (products, cart) => (
 );
 
 const ClientProducs = () => {
-  const { showProducts, cart, setShowProducts } = useContext(ContextAplication);
+  const { showProducts, cart, setShowProducts, sucess } = useContext(ContextAplication);
   const history = useHistory();
 
   useEffect(() => {
@@ -50,6 +50,7 @@ const ClientProducs = () => {
 
   return (
     <div className="container-cards">
+  { sucess ? <h3>Compra realizada com sucesso!</h3> : null }
       <h2>Cliente - Produtos</h2>
       { showProducts && createCardsMenuOptions(showProducts, cart)}
       <ButtonViewCart />

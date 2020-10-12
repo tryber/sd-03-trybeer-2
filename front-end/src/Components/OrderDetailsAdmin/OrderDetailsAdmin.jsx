@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import TopMenuAdmin from '../Header/TopMenuAdmin';
 import { getToken } from '../../Services/index';
 
-const AdminOrderDetails = (props) => {
-
+function AdminOrderDetails() {
   const [list, setList] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
-    if (!getToken) return props.history.push('/login');
+    if (!getToken) return history.push('/login');
     const headers = new Headers({
-      "Authorization": getToken
+      'Authorization': getToken
     });
     fetch('http://localhost:3001/admin/orders', { headers })
       .then((response) => response.json()

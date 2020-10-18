@@ -9,10 +9,11 @@ const checkoutController = async (req, res) => {
     total_price: total,
     delivery_address: address.street,
     delivery_number: address.number,
-    status,
     products: cart,
+    status,
   };
   const addToSales = await checkoutService(checkoutObject);
+  console.log('ADDTOSALE', addToSales);
   res.status(200).json(addToSales);
 };
 

@@ -6,8 +6,8 @@ const checkoutService = async ({
   total_price,
   delivery_address,
   delivery_number,
-  status = 'Pendente',
   products,
+  status = 'Pendente',
 }) => {
   const dadosVenda = {
     user_id,

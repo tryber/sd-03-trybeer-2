@@ -25,7 +25,7 @@ const getByOrderId = async (req, res) => {
 };
 
 const getAllOrdersUser = async (_req, res) => {
-  try{
+  try {
     const orders = await getAllOrders();
     return res.status(200).json(orders);
   } catch (error) {

@@ -25,7 +25,7 @@ app.post('/login', loginController);
 app.post('/register', registerController);
 app.post('/profile', verifyToken, profileController);
 app.post('/checkout', verifyToken, checkoutController);
-app.use('/orders', verifyToken, ordersRoutes);
+app.use('/orders', ordersRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Running on :${PORT}`));

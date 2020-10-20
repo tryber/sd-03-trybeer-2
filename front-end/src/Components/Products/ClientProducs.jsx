@@ -10,6 +10,7 @@ import { randomNumber } from '../../Services';
 
 const two = 2;
 const zero = 0;
+const time = 5000;
 const quantityCartProduct = (e, cart) => cart.filter(({ name }) => name === e)
   .map(({ qnt }) => qnt);
 
@@ -39,7 +40,7 @@ const createCardsMenuOptions = (products, cart) => (
 );
 
 const ClientProducs = () => {
-  const { showProducts, cart, setShowProducts, sucess } = useContext(ContextAplication);
+  const { showProducts, cart, setShowProducts, finish, setFinish } = useContext(ContextAplication);
   const history = useHistory();
 
   useEffect(() => {
@@ -48,9 +49,13 @@ const ClientProducs = () => {
     api.get('/products').then(({ data }) => setShowProducts(data));
   }, [history, setShowProducts]);
 
+  setTimeout(() => {
+    setFinish(false);
+  }, time);
+
   return (
     <div className="container-cards">
-  { sucess ? <h3>Compra realizada com sucesso!</h3> : null }
+  { finish && 'Compra realizada com sucesso!' }
       <h2>Cliente - Produtos</h2>
       { showProducts && createCardsMenuOptions(showProducts, cart)}
       <ButtonViewCart />

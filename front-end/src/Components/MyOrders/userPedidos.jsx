@@ -9,11 +9,11 @@ const UserOrders = () => {
 
   useEffect(() => {
     api.get('/orders').then(({ data }) => setOrdersUser(data));
-  }, [setOrdersUser, ordersUser]);
+  }, []);
 
   return (
     <div>
-      <TopMenu param="Meus pedidos" />
+      <TopMenu param="Meus Pedidos" />
       { ordersUser && <CardOrders ordersUser={ ordersUser } /> }
     </div>
   );

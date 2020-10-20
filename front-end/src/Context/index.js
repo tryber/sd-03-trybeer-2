@@ -29,7 +29,6 @@ const AplicationProvider = ({ children }) => {
   const [finish, setFinish] = useState(false);
   const [ordersUser, setOrdersUser] = useState();
   const [orderDetails, setOrderDetails] = useState();
-  const [sucess, setSucess] = useState('');
 
   const context = {
     registerUser,
@@ -58,8 +57,6 @@ const AplicationProvider = ({ children }) => {
     setOrdersUser,
     setOrderDetails,
     orderDetails,
-    sucess,
-    setSucess,
   };
 
   return (

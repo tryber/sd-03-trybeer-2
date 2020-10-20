@@ -4,13 +4,16 @@ import TopMenu from '../Header/TopMenu';
 import CardrDetailsOrders from './CardrDetailsOrders';
 import api from '../../Services/api';
 
-const UserOrderDetails = () => {
-  const { ordersUser, orderDetails, setOrderDetails } = useContext(ContextAplication);
-  const { id } = ordersUser;
+const one = 1;
 
+const UserOrderDetails = () => {
+  const { orderDetails, setOrderDetails } = useContext(ContextAplication);
+  
   useEffect(() => {
+    const locationUrl = window.location.pathname;
+    const id = locationUrl.charAt(locationUrl.length - one);
     api.get(`/orders/${id}`).then(({ data }) => setOrderDetails(data));
-  }, [orderDetails, setOrderDetails, id]);
+  }, [orderDetails, setOrderDetails]);
 
   return (
     <div>

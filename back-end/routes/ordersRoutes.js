@@ -1,8 +1,14 @@
 const router = require('express').Router();
-const { getByUserId, getByOrderId } = require('../controllers/ordersController');
+const {
+  getByUserId,
+  getByOrderId,
+  getAllOrdersUser,
+  getOrdersByIdUser,
+} = require('../controllers/ordersController');
 
 module.exports = (() => {
-  router.get('/', getByUserId);
+  router.get('/:orderId', getOrdersByIdUser);
+  router.get('/', getAllOrdersUser);
   router.post('/', getByUserId);
   router.post('/:orderId', getByOrderId);
   return router;

@@ -8,12 +8,12 @@ const UserOrders = () => {
   const { setOrdersUser, ordersUser } = useContext(ContextAplication);
 
   useEffect(() => {
-    api.get('/orders').then((data) => console.log(data));
-  }, [setOrdersUser, ordersUser]);
+    api.get('/orders').then(({ data }) => setOrdersUser(data));
+  }, []);
 
   return (
     <div>
-      <TopMenu param="Meus pedidos" />
+      <TopMenu param="Meus Pedidos" />
       { ordersUser && <CardOrders ordersUser={ ordersUser } /> }
     </div>
   );

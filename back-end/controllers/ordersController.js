@@ -4,6 +4,7 @@ const getByUserId = async (req, res) => {
   try {
     const userId = req.user.id;
     const getOrders = await getAll(userId);
+    // console.log('getOrders', getOrders);
     if (getOrders) return res.status(201).json(getOrders);
     return res.status(400).json({ err: true });
   } catch (error) {

@@ -1,15 +1,15 @@
 // const connection = require('../models/connection');
 const { getAllDetails } = require('../models/getOrdersModels');
 const {
-  getAllById,
+  // getAllById,
   getByOrderId,
-  getProducts,
-  getSalesProducts,
-  getSalesJoinProducts,
+  // getProducts,
+  // getSalesProducts,
+  // getSalesJoinProducts,
 } = require('../models/getOrdersModels');
 const renameProperty = require('../utils/renameObject');
 
-const getAll = async (userId) => {
+const getAll = async (_userId) => {
   try {
     const allDetails = await getAllDetails();
     return allDetails;
@@ -23,9 +23,8 @@ const getOne = async (orderId, userId) => {
     const getOrders = await getByOrderId(orderId, userId);
     const getOrdersObject = Object.assign({}, ...getOrders);
     const names = ['id', 'date', 'price'];
-    Object.entries(getOrdersObject).forEach((_item, i) =>
-      renameProperty(getOrdersObject, i, names[i]),
-    );
+    const objetoParaArray = Object.entries(getOrdersObject);
+    objetoParaArray.forEach((_item, i) => renameProperty(getOrdersObject, i, names[i]));
     if (getOrders.length > 0) return getOrdersObject;
     return false;
   } catch (error) {

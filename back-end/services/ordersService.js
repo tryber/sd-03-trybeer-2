@@ -1,11 +1,5 @@
 // const connection = require('../models/connection');
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'Trybeer',
-});
+const { getAllDetails } = require('../models/getOrdersModels');
 const {
   getAllById,
   getByOrderId,
@@ -16,7 +10,33 @@ const {
 const renameProperty = require('../utils/renameObject');
 
 const getAll = async (userId) => {
-  const getAllOrders = await getAllById(userId);
+  try {
+    const allDetails = await getAllDetails();
+    return allDetails;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getOne = async (orderId, userId) => {
+  try {
+    const getOrders = await getByOrderId(orderId, userId);
+    const getOrdersObject = Object.assign({}, ...getOrders);
+    const names = ['id', 'date', 'price'];
+    Object.entries(getOrdersObject).forEach((_item, i) =>
+      renameProperty(getOrdersObject, i, names[i]),
+    );
+    if (getOrders.length > 0) return getOrdersObject;
+    return false;
+  } catch (error) {
+    return error;
+  }
+};
+
+module.exports = { getAll, getOne };
+
+/**
+ const getAllOrders = await getAllById(userId);
   const numPedidos = getAllOrders.map((pedido) => pedido.id);
   const products = await getProducts();
   if (getAllOrders.length < 1) return false;
@@ -36,29 +56,13 @@ const getAll = async (userId) => {
       productSold[0].saleId = pedido;
       if (productSold[0].saleId === getAllOrders[iPedido].id) {
         getAllOrders[iPedido].cart = productSold;
-        finalProducts.push(getAllOrders);
+        // finalProducts.push(getAllOrders);
       }
+      console.log(getAllOrders);
     });
   });
-  return finalProducts;
+  return getAllOrders;
   // console.log('getAllOrders', getAllOrders);
   // finalProducts.push(getAllOrders, test);
   // return getAllOrders;
-};
-
-const getOne = async (orderId, userId) => {
-  try {
-    const getOrders = await getByOrderId(orderId, userId);
-    const getOrdersObject = Object.assign({}, ...getOrders);
-    const names = ['id', 'date', 'price'];
-    Object.entries(getOrdersObject).forEach((_item, i) =>
-      renameProperty(getOrdersObject, i, names[i]),
-    );
-    if (getOrders.length > 0) return getOrdersObject;
-    return false;
-  } catch (error) {
-    return error;
-  }
-};
-
-module.exports = { getAll, getOne };
+ */

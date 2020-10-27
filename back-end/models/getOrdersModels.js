@@ -1,4 +1,6 @@
 const connection = require('./connection');
+require('dotenv/config');
+const mysqlx = require('@mysql/xdevapi');
 var mysql = require('mysql');
 var newConn = mysql.createConnection({
   host: 'localhost',
@@ -11,6 +13,44 @@ var newConn = mysql.createConnection({
 // complaining about varibles with no cameCase
 const saleDate = 'sale_date';
 const totalPrice = 'total_price';
+
+const querySalesDetails = `SELECT P.id product_id, S.id, S.sale_date, S.total_price sale_price, (P.price * SP.quantity) individual_price, P.name, SP.sale_id, SP.quantity FROM sales S JOIN products P JOIN sales_products SP ON P.id = SP.product_id  ON SP.sale_id = S.id;`;
+
+const getAllDetails = async () =>
+  mysqlx
+    .getSession({
+      user: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      host: process.env.HOSTNAME,
+      port: 33060,
+      schema: 'Trybeer',
+    })
+    .then((session) => session.sql(querySalesDetails).execute())
+    .then((res) =>
+      res
+        .fetchAll()
+        .map(
+          ([
+            product_id,
+            sale_id,
+            timestamp,
+            total_price,
+            sale_price,
+            name,
+            product_id2,
+            quantity,
+          ]) => ({
+            product_id,
+            sale_id,
+            timestamp,
+            total_price,
+            sale_price,
+            name,
+            product_id2,
+            quantity,
+          }),
+        ),
+    );
 
 const getAllById = async (userId) =>
   connection()
@@ -47,18 +87,16 @@ const getProducts = () =>
       })),
     );
 
-
 const getSalesJoinProducts = async (userId) => {
   newConn.connect();
   const finalObject = [];
   const venda = await newConn.query(
     `SELECT user_id, id, total_price FROM sales;`,
     (error, results, fields) => {
-      if (error)
-        throw error;
+      if (error) throw error;
       var resultArray = Object.values(JSON.parse(JSON.stringify(results[0])));
       finalObject.push(...resultArray);
-    }
+    },
   );
   return venda;
 };
@@ -110,4 +148,5 @@ module.exports = {
   getProducts,
   getSalesProducts,
   getSalesJoinProducts,
+  getAllDetails,
 };

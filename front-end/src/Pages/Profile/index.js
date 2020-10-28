@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from '../../Components/Profile/Form';
 
-import './styles.css';
+// import './styles.css';
 
 const Profile = () => (
   <div className="container-profile">

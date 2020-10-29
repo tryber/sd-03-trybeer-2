@@ -3,7 +3,7 @@ const {
   getByUserId,
   getByOrderId,
   getAllOrdersUser,
-  getOrdersByIdUser,
+  // getOrdersByIdUser,
 } = require('../controllers/ordersController');
 
 module.exports = (() => {

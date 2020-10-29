@@ -16,12 +16,11 @@ const getByOrderId = async (req, res) => {
   try {
     const { orderId } = req.params;
     const getOrder = await getAllDetails(orderId);
-    console.log('getOrder', getOrder)
     if (getOrder) return res.status(200).json(getOrder);
+    return res.status(200).json(getOrder);
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
-  return res.status(200).json(getOrder);
 };
 
 const getAllOrdersUser = async (_req, res) => {

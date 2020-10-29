@@ -120,14 +120,14 @@ const getByOrderId = async (orderId) => connection()
     }),
   ));
 
-  const getAllOrders = async () => connection()
+const getAllOrders = async () => connection()
   .then((db) => db
     .getTable('sales')
     .select('id', saleDate, totalPrice)
     .orderBy('id')
     .execute())
   .then((response) => response.fetchAll() || [])
-  .then((result) => result.map(([id, sale_date , total_price ]) => ({
+  .then((result) => result.map(([id, sale_date = 'saleDate', total_price = 'totalPrice']) => ({
     id,
     sale_date,
     total_price,

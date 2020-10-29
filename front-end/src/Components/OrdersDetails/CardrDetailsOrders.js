@@ -12,7 +12,7 @@ const CardrDetailsOrders = ({ orderDetails }) => orderDetails.map((e, idx) => {
     const finshDate = `${date.getDate()}/${date.getMonth()}`;
     return (
       <div key={ randomNumber() }>
-        <p data-testid="order-number">{`Pedido ${e['orderId']}`}</p>
+        <p data-testid="order-number">{`Pedido ${e.orderId}`}</p>
         <p data-testid="order-date">{finshDate}</p>
         <p data-testid={ `${idx}-product-qtd` }>{e.quantity}</p>
         <p data-testid={ `${idx}-product-name` }>{e.name}</p>

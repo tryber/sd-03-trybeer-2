@@ -12,7 +12,10 @@ const UserOrderDetails = () => {
   useEffect(() => {
     const locationUrl = window.location.pathname;
     const id = locationUrl.charAt(locationUrl.length - one);
-    api.get(`/orders/${id}`).then(({ data }) => setOrderDetails(data));
+    if (!orderDetails.length) {
+      api.post(`/orders/${id}`).then(({ data }) => setOrderDetails(data));
+    };
+   return;
   }, [orderDetails, setOrderDetails]);
 
   return (

@@ -36,7 +36,7 @@ const getAllDetails = async () => mysqlx
         totalSalePrice,
         salePrice,
         name,
-        productId2,
+        orderId,
         quantity,
       ]) => ({
         productId,
@@ -45,7 +45,7 @@ const getAllDetails = async () => mysqlx
         totalSalePrice,
         salePrice,
         name,
-        productId2,
+        orderId,
         quantity,
       }),
     ));
@@ -104,13 +104,12 @@ const getSalesProducts = (saleId) => connection()
     quantity,
   })));
 
-const getByOrderId = async (orderId, userId) => connection()
+const getByOrderId = async (orderId) => connection()
   .then((db) => db
     .getTable('sales')
     .select('id', saleDate, totalPrice)
     .bind('orderId', orderId)
-    .bind('userId', userId)
-    .where('id = :orderId AND user_id = :userId')
+    .where('id = :orderId')
     .execute())
   .then((response) => response.fetchAll())
   .then((result) => result.filter(
@@ -121,7 +120,21 @@ const getByOrderId = async (orderId, userId) => connection()
     }),
   ));
 
+  const getAllOrders = async () => connection()
+  .then((db) => db
+    .getTable('sales')
+    .select('id', saleDate, totalPrice)
+    .orderBy('id')
+    .execute())
+  .then((response) => response.fetchAll() || [])
+  .then((result) => result.map(([id, sale_date , total_price ]) => ({
+    id,
+    sale_date,
+    total_price,
+  })));
+
 module.exports = {
+  getAllOrders,
   getAllById,
   getByOrderId,
   getProducts,

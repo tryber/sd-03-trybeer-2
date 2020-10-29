@@ -1,28 +1,27 @@
-const { getAll, getOne, getOrderUser } = require('../services/ordersService');
-const { getAllOrders } = require('../models/getOrdersModels');
+const { getAll, getOrderUser } = require('../services/ordersService');
+const { getAllOrders, getAllDetails } = require('../models/getOrdersModels');
 
 const getByUserId = async (req, res) => {
   try {
     const userId = req.user.id;
     const getOrders = await getAll(userId);
-    // console.log('getOrders', getOrders);
     if (getOrders) return res.status(201).json(getOrders);
     return res.status(400).json({ err: true });
   } catch (error) {
     return error;
   }
 };
-
+// Alterar request getAllDetails para service.
 const getByOrderId = async (req, res) => {
   try {
     const { orderId } = req.params;
-    const { id: userId } = req.user;
-    const getOrder = await getOne(orderId, userId);
+    const getOrder = await getAllDetails(orderId);
+    console.log('getOrder', getOrder)
     if (getOrder) return res.status(200).json(getOrder);
   } catch (error) {
-    return res.status(200).json(error);
+    return res.status(400).json({ message: error.message });
   }
-  return res.status(400).json({ err: true });
+  return res.status(200).json(getOrder);
 };
 
 const getAllOrdersUser = async (_req, res) => {

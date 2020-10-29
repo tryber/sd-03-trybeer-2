@@ -7,9 +7,11 @@ import CardOrders from './CardOrders';
 const UserOrders = () => {
   const { setOrdersUser, ordersUser } = useContext(ContextAplication);
 
+  console.log(ordersUser)
+
   useEffect(() => {
     api.get('/orders').then(({ data }) => setOrdersUser(data));
-  }, []);
+  }, [setOrdersUser]);
 
   return (
     <div>

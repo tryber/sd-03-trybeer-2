@@ -4,17 +4,19 @@ import { randomNumber } from '../../Services';
 const one = 1;
 const two = 2;
 
-const CardrDetailsOrders = ({ orderDetails }) => orderDetails.map(({ timestamp,
+const CardrDetailsOrders = ({ orderDetails }) => orderDetails.map(({
+  timestamp,
   orderId,
   quantity,
   name,
   salePrice,
-  totalSalePrice }, idx) => {
+  totalSalePrice,
+}, idx) => {
   const locationUrl = window.location.pathname;
   const id = locationUrl.charAt(locationUrl.length - one);
   if (orderId === Number(id)) {
     const date = new Date(timestamp);
-    const finshDate = `${date.getDate()}/${date.getMonth()}`;
+    const finshDate = `${date.getDate()}/${date.getMonth() + one}`;
     return (
       <div key={ randomNumber() }>
         <p data-testid="order-number">{`Pedido ${orderId}`}</p>

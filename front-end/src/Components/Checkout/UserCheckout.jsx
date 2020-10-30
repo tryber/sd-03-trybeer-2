@@ -7,7 +7,7 @@ import TopMenu from '../Header/TopMenu';
 
 const zero = 0;
 const two = 2;
-const time = 2000;
+const time = 7000;
 
 const handleChangeInput = (name, event, input, setAddress) => {
   setAddress({ ...input, [name]: event });

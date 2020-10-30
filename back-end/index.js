@@ -11,6 +11,7 @@ const productsControler = require('./controllers/productsControler');
 const ordersRoutes = require('./routes/ordersRoutes');
 const verifyToken = require('./services/verifyToken');
 const AdminDetail = require('./controllers/AdminOrderDetailController');
+const adminCardDetail = require('./controllers/adminCardDetail');
 
 const app = express();
 app.use(cors());
@@ -26,6 +27,7 @@ app.post('/register', registerController);
 app.post('/profile', verifyToken, profileController);
 app.post('/checkout', verifyToken, checkoutController);
 app.use('/orders', ordersRoutes);
+app.get('/orders/:id', adminCardDetail.getAdminDetailCart);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Running on :${PORT}`));

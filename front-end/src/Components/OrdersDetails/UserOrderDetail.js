@@ -13,7 +13,7 @@ const UserOrderDetails = () => {
     const locationUrl = window.location.pathname;
     const id = locationUrl.charAt(locationUrl.length - one);
     if (!orderDetails.length) {
-      api.post(`/orders/${id}`).then(({ data }) => setOrderDetails(data));
+      api.get(`/orders/${id}`).then(({ data }) => setOrderDetails(data));
     }
   }, [orderDetails, setOrderDetails]);
 

@@ -1,13 +1,13 @@
 import React from 'react';
-import FormInput from '../../Components/FormInput';
-import ButtonEnter from '../../Components/Login/ButtonEnter';
+import FormInput from '../../Components/Login/FormInput';
 import RecordButton from '../../Components/Login/RecordButton';
 
+// import './styles.css';
+
 const Login = () => (
-  <div>
+  <div className="container-login">
     <FormInput />
     <RecordButton />
-    <ButtonEnter />
   </div>
 );
 

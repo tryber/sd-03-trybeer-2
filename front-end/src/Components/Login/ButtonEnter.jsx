@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { ContextPlication } from '../../Context';
+import { ContextAplication } from '../../Context';
 
 const ButtonEnter = () => {
-  const { disableButton } = useContext(ContextPlication);
+  const { disableButton } = useContext(ContextAplication);
   return (
     <div>
       <button
@@ -10,7 +10,7 @@ const ButtonEnter = () => {
         data-testid="signin-btn"
         type="submit"
       >
-        Entrar
+        ENTRAR
       </button>
     </div>
   );

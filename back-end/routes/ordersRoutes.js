@@ -3,13 +3,13 @@ const {
   getByUserId,
   getByOrderId,
   getAllOrdersUser,
-  getOrdersByIdUser,
+  // getOrdersByIdUser,
 } = require('../controllers/ordersController');
 
 module.exports = (() => {
-  router.get('/:orderId', getOrdersByIdUser);
+  router.get('/:orderId', getByOrderId);
   router.get('/', getAllOrdersUser);
-  router.post('/', getByUserId);
   router.post('/:orderId', getByOrderId);
+  router.post('/', getByUserId);
   return router;
 })();

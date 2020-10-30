@@ -8,11 +8,13 @@ const one = 1;
 
 const UserOrderDetails = () => {
   const { orderDetails, setOrderDetails } = useContext(ContextAplication);
-  
+
   useEffect(() => {
     const locationUrl = window.location.pathname;
     const id = locationUrl.charAt(locationUrl.length - one);
-    api.get(`/orders/${id}`).then(({ data }) => setOrderDetails(data));
+    if (!orderDetails.length) {
+      api.post(`/orders/${id}`).then(({ data }) => setOrderDetails(data));
+    }
   }, [orderDetails, setOrderDetails]);
 
   return (

@@ -5,16 +5,17 @@ import CardrDetailsOrders from './CardrDetailsOrders';
 import api from '../../Services/api';
 
 const one = 1;
+const locationUrl = window.location.pathname;
+const id = locationUrl.charAt(locationUrl.length - one);
 
 const UserOrderDetails = () => {
   const { orderDetails, setOrderDetails } = useContext(ContextAplication);
 
   useEffect(() => {
-    const locationUrl = window.location.pathname;
-    const id = locationUrl.charAt(locationUrl.length - one);
     if (!orderDetails.length) {
-      api.post(`/orders/${id}`).then(({ data }) => setOrderDetails(data));
-    }
+      api.get(`/orders/${id}`).then(({ data }) => setOrderDetails(data));
+    };
+   return;
   }, [orderDetails, setOrderDetails]);
 
   return (

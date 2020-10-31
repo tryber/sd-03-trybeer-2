@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const adminCardDetail = require('../controllers/adminCardDetail');
 const {
   getByUserId,
   getByOrderId,
@@ -11,5 +12,7 @@ module.exports = (() => {
   router.get('/', getAllOrdersUser);
   router.post('/:orderId', getByOrderId);
   router.post('/', getByUserId);
+  router.get('/orders/:orderId', adminCardDetail.getAdminDetailCart);
+  router.put('/orders/:orderId', adminCardDetail.AdminUpdateStatus);
   return router;
 })();

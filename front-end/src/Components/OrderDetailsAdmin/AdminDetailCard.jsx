@@ -1,16 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
+import api from '../../Services/api';
 
-const AdminDetailCard = ({ listDetail }) => listDetail.map(({ id,status, totalPrice }, idx) => (
-  <div>
-    <h1 data-testid="order-number">Pedido:{id}</h1>
-    <h1 data-testid={`${idx}-order-status`}>{status}</h1>
-    <p d-ata-testid="${idx}-product-qtd">Quantidade-produto</p>
-    <p data-testid="${idx}product-name">Nome do produto</p>
-    <p data-testid="${idx}order-unit-price">Valor-por-unidade</p>
-    <p data-testid="${idx}product-total-value">{totalPrice}</p>
-    <p>preço</p>
-    <button data-testid="mark-as-delivered-btn">Marcar como entregue</button>
-  </div>
-));
+const two = 2;
+
+const AdminDetailCard = ({ listDetail }) => {
+  const firstEl = listDetail[0] || {};
+  const [newStatus, setNewStatus] = useState('Pendente');
+
+  return (
+    <div>
+      <h1 data-testid="order-number">Pedido {firstEl.saleId}</h1>
+      <h2 data-testid="order-status">{newStatus}</h2>
+      {listDetail.map(({ name, price, quantity }, idx) => {
+        const priceXqnt = (price * quantity);
+        return (
+          <div>
+            <p data-testid={`${idx}-product-qtd`}>Unid:{quantity}</p>
+            <p data-testid={`${idx}-product-name`}>{name}</p>
+            <p data-testid={`${idx}-order-unit-price`}>
+              {` (R$ ${price.toFixed(two).toString().replace('.', ',')})`}
+            </p>
+            <p data-testid={`${idx}-product-total-value`}>
+              {` R$ ${priceXqnt.toFixed(two).toString().replace('.', ',')}`}
+            </p>
+          </div>
+        )
+      })}
+      <p data-testid="order-total-value">
+        {`Total: R$ ${firstEl.totalPrice.toFixed(two).toString().replace('.', ',')}`}
+      </p>
+      {newStatus === 'Pendente' ? <button
+        onClick={() => {
+          const locationUrl = window.location.pathname;
+          const id = locationUrl.charAt(locationUrl.length - 1);
+          api.put(`/admin/orders/${id}`, { status: 'Entregue' });
+          setNewStatus('Entregue');
+        }}
+        data-testid="mark-as-delivered-btn">Marcar como entregue</button> : null}
+    </div>
+  )
+}
+
 
 export default AdminDetailCard;

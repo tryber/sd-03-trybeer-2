@@ -1,19 +1,30 @@
 const connection = require('./connection');
+const mysqlx = require('@mysql/xdevapi');
 
-const AdminCardDetail = async (saleID) =>
-  connection().then((session) => session
+const AdminCardDetail = async (orderId) => mysqlx
+  .getSession({
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    host: process.env.HOSTNAME,
+    port: 33060,
+    schema: 'Trybeer',
+  })
+  .then((session) => session
     .sql(`
-    SELECT saleProducts.sale_id, saleProducts.product_id, saleProducts.quantity, products.name, products.price
-    FROM Trybeer.sales_products AS saleProducts
-    INNER JOIN Trybeer.products AS products
-    ON saleProducts.product_id = products.id
-    WHERE saleProducts.sale_id = ${saleID};`)
+    SELECT s.status,s.total_price, sp.sale_id, sp.product_id, sp.quantity, pr.name, pr.price
+    FROM Trybeer.sales_products AS sp
+    JOIN Trybeer.products AS pr
+    ON sp.product_id = pr.id
+    JOIN Trybeer.sales AS s
+    ON s.id = sp.sale_id
+    WHERE sp.sale_id = ${orderId};
+  `)
     .execute())
-    .then((data) => data.fetchAll())
-    .then((itens) => itens.map(([saleId, productId, quantity, name, price]) => ({
-      saleId, productId, quantity, name, price
-    })))
-    .catch((err) => { console.error(err); });
+  .then((results) => results.fetchAll())
+  .then((products) => products.map(([status, totalPrice, saleId, productId, quantity, name, price]) => ({
+    status, totalPrice, saleId, productId, quantity, name, price,
+  })))
+  .catch((err) => { console.error(err); });
 
 const getStatus = (statusID) =>
   connection().then((db) => db
@@ -27,4 +38,14 @@ const getStatus = (statusID) =>
       id ? ({ id, userId, totalPrice, saleDate, status }) : null))
     .catch((err) => { console.error(err); });
 
-module.exports = { AdminCardDetail, getStatus };
+const updateStatus = async (id) => connection()
+  .then((db) => db
+    .getTable('sales')
+    .update()
+    .set('status', 'Entregue')
+    .where('id = :id')
+    .bind('id', id)
+    .execute())
+  .catch((err) => { console.error(err); });
+
+module.exports = { AdminCardDetail, getStatus, updateStatus };

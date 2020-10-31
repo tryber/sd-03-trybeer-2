@@ -12,7 +12,7 @@ import AdminProfile from '../Pages/Admin';
 /* import AdminOrders from '../Pages/AdminsOrders'; */
 import DetailsOrders from '../Pages/userOrders/userDetailsOrders';
 import DetailsOrdersAdmin from '../Pages/AdminOrderDetails';
-import AdminDetailCard from '../Components/OrderDetailsAdmin/AdminDetailCard';
+import AdminDetailCard from '../Components/OrderDetailsAdmin/AdminDetailOrderCard';
 
 const Routers = () => (
   <Switch>

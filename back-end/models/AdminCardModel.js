@@ -30,27 +30,27 @@ const AdminCardDetail = async (orderId) => mysqlx
     name,
     price,
   ]) => ({
-      status,
-      totalPrice,
-      saleId,
-      productId,
-      quantity,
-      name,
-      price,
-    })))
+    status,
+    totalPrice,
+    saleId,
+    productId,
+    quantity,
+    name,
+    price,
+  })))
   .catch((err) => { console.error(err); });
 
-const getStatus = (statusID) =>
-  connection().then((db) => db
+const getStatus = (statusID) => connection()
+  .then((db) => db
     .getTable('sales')
     .select(['id, user_id, total_price, sale_date, status'])
     .where('id = :id')
     .bind('id', statusID)
     .execute())
-    .then((getSaleId) => getSaleId.fetchAll()[0] || [])
-    .then(([id, userId, totalPrice, saleDate, status]) => (
-      id ? ({ id, userId, totalPrice, saleDate, status }) : null))
-    .catch((err) => { console.error(err); });
+  .then((getSaleId) => getSaleId.fetchAll()[0] || [])
+  .then(([id, userId, totalPrice, saleDate, status]) => (
+    id ? ({ id, userId, totalPrice, saleDate, status }) : null))
+  .catch((err) => { console.error(err); });
 
 const updateStatus = async (id) => connection()
   .then((db) => db

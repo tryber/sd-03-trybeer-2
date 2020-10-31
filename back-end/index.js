@@ -11,7 +11,6 @@ const productsControler = require('./controllers/productsControler');
 const ordersRoutes = require('./routes/ordersRoutes');
 const verifyToken = require('./services/verifyToken');
 const AdminDetail = require('./controllers/AdminOrderDetailController');
-const adminCardDetail = require('./controllers/adminCardDetail');
 
 const app = express();
 app.use(cors());

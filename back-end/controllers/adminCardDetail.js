@@ -12,6 +12,6 @@ const AdminUpdateStatus = rescue(async (req, res) => {
   const { orderId } = req.params;
   await uService.updateAdminCartStatus(orderId);
   return res.status(200).send();
-})
+});
 
 module.exports = { getAdminDetailCart, AdminUpdateStatus };

@@ -1,5 +1,5 @@
-const connection = require('./connection');
 const mysqlx = require('@mysql/xdevapi');
+const connection = require('./connection');
 
 const AdminCardDetail = async (orderId) => mysqlx
   .getSession({
@@ -21,9 +21,23 @@ const AdminCardDetail = async (orderId) => mysqlx
   `)
     .execute())
   .then((results) => results.fetchAll())
-  .then((products) => products.map(([status, totalPrice, saleId, productId, quantity, name, price]) => ({
-    status, totalPrice, saleId, productId, quantity, name, price,
-  })))
+  .then((products) => products.map(([
+    status,
+    totalPrice,
+    saleId,
+    productId,
+    quantity,
+    name,
+    price,
+  ]) => ({
+      status,
+      totalPrice,
+      saleId,
+      productId,
+      quantity,
+      name,
+      price,
+    })))
   .catch((err) => { console.error(err); });
 
 const getStatus = (statusID) =>

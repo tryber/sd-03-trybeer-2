@@ -5,12 +5,12 @@ const CardDetailsAdmin = ({ list }) => (
   list.map(({ id, deliveryAddress, deliveryNumber, totalPrice, status }, idx) => (
     <Link to={`/admin/orders/${id}`}>
       <div data-testid={`${idx}-order-card-container`}>
-        <p data-testid={`${idx}-order-number`}>Pedido {id}</p>
+        <h1 data-testid={`${idx}-order-number`}>Pedido {id}</h1>
         <p data-testid={`${idx}-order-address`}>
           {deliveryAddress}, {deliveryNumber}
         </p>
         <p data-testid={`${idx}-order-total-value`}>{`Total: R$ ${totalPrice.toFixed(2).toString().replace('.', ',')}`}</p>
-        <p data-testid={`${idx}-order-status`}>{status}</p>
+        <h2 data-testid={`${idx}-order-status`}>{status}</h2>
       </div>
     </Link>
   ))
